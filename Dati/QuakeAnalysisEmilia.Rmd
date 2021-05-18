@@ -1,0 +1,834 @@
+---
+title: "Analisi di Dati Terremoto Emilia 2012"
+author: "Marco Mamei"
+date: "27-7-2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+output = "HTML" # Imposto una voarabile per decidere che tipo di output usare in knit
+```
+
+## Importazione di Librerie
+
+
+```{r, echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+# operazioni su data-frame
+library(dplyr)
+library(tidyr)
+library(broom)
+
+# visualizzazione
+library(ggplot2)
+library(gridExtra)
+library(ggmap)
+library(corrplot)
+library(rgdal)
+library(sp)
+library(rgeos)
+library(maptools)
+library(leaflet)
+library(leaflet.minicharts)
+library(RColorBrewer)
+```
+
+### Imposto i paramteri
+
+```{r, echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+
+# Params
+months = c('05')
+#type_of_norm = 'none|stl|divbymean'
+#type_of_sync = 'maxccf|mi|dtw' 
+ 
+norm_sync_m = matrix(c('none','maxccf',
+                       'stl','maxccf',
+                       'divbymean','maxccf',
+                       'divbymean','mi',
+                       'divbymean','dtw'), ncol=2, byrow=T)
+
+```
+
+
+
+## Focus on YoY differences
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+
+#month = '05'
+#type_of_norm = 'divbymean'
+#type_of_sync = 'dtw' 
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+
+file2011 = paste('feat/FEAT/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015 = paste('feat/FEAT/MoQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2016 = paste('feat/FEAT/MoQuakeArea_2016',month,'16_2016',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2017 = paste('feat/FEAT/MoQuakeArea_2017',month,'16_2017',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('comune','RER_32','tot11','weekday11','weekend11','day11','night11','all.sync11','hquake.sync11','nohquake.sync11')
+
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('comune','RER_32','tot15','weekday15','weekend15','day15','night15','all.sync15','hquake.sync15','nohquake.sync15')
+
+data2016= read.csv(file2016,stringsAsFactors = F)
+names(data2016) = c('comune','RER_32','tot16','weekday16','weekend16','day16','night16','all.sync16','hquake.sync16','nohquake.sync16')
+
+data2017 = read.csv(file2017,stringsAsFactors = F)
+names(data2017) = c('comune','RER_32','tot17','weekday17','weekend17','day17','night17','all.sync17','hquake.sync17','nohquake.sync17')
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011, data2015,data2016,data2017)) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+
+dataHQ = filter(data2,RER_32 == 1)
+names(dataHQ)[9] = 'within_sync11'
+names(dataHQ)[10] = 'between_sync11'
+names(dataHQ)[17] = 'within_sync15'
+names(dataHQ)[18] = 'between_sync15'
+names(dataHQ)[25] = 'within_sync16'
+names(dataHQ)[26] = 'between_sync16'
+names(dataHQ)[33] = 'within_sync17'
+names(dataHQ)[34] = 'between_sync17'
+
+dataNHQ = filter(data2, RER_32 == 0)
+names(dataNHQ)[10] = 'within_sync11'
+names(dataNHQ)[9] = 'between_sync11'
+names(dataNHQ)[18] = 'within_sync15'
+names(dataNHQ)[17] = 'between_sync15'
+names(dataNHQ)[26] = 'within_sync16'
+names(dataNHQ)[25] = 'between_sync16'
+names(dataNHQ)[34] = 'within_sync17'
+names(dataNHQ)[33] = 'between_sync17'
+
+data2 = rbind(dataHQ, dataNHQ)
+
+data2$diff.weekday.weekend.ratio = data2$weekday15/data2$weekend15 - data2$weekday11/data2$weekend11
+data2$diff.day.night.ratio = data2$day15/data2$night15 - data2$day11/data2$night11
+
+data2$diff.within.sync = data2$within_sync15 - data2$within_sync11
+data2$diff.between.sync = data2$between_sync15 - data2$between_sync11
+
+tit = paste('2015 - 2011',type_of_norm,type_of_sync)
+
+g1 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.weekday.weekend.ratio)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g2 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.day.night.ratio)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g3 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g4 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+
+#grid.arrange(g1, g2, g3, g4,  nrow = 2)
+grid.arrange(g3, g4,  nrow = 1)
+}
+}
+
+```
+
+
+
+
+## Comparison between 2015 PLS and 2011
+
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+#file2011 = paste('feat/FEAT/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+#file2011 = paste('feat/FEAT/MoQuakeArea_20110401_20110417_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2011 = paste('feat/FEAT/MoQuakeArea_20110426_20110517_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+file2015 = paste('feat/FEAT/MoQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015pls = paste('feat/FEAT/MoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+file2015sezpls = paste('feat/FEAT/sezioniMoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('comune','RER_32','tot11','weekday11','weekend11','day11','night11','all.sync11','hquake.sync11','nohquake.sync11')
+
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('comune','RER_32','tot15','weekday15','weekend15','day15','night15','all.sync15','hquake.sync15','nohquake.sync15')
+
+data2015pls = read.csv(file2015pls,stringsAsFactors = F)
+names(data2015pls) = c('comune','RER_32','tot15pls','weekday15pls','weekend15pls','day15pls','night15pls','all.sync15pls','hquake.sync15pls','nohquake.sync15pls')
+
+data2015sezpls = read.csv(file2015sezpls,stringsAsFactors = F)
+names(data2015sezpls) = c('comune','RER_32','tot15sezpls','weekday15sezpls','weekend15sezpls','day15sezpls','night15sezpls','all.sync15sezpls','hquake.sync15sezpls','nohquake.sync15sezpls')
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011, data2015,data2015pls,data2015sezpls)) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+dataHQ = filter(data2,RER_32 == 1)
+names(dataHQ)[9] = 'within_sync11'
+names(dataHQ)[10] = 'between_sync11'
+names(dataHQ)[17] = 'within_sync15'
+names(dataHQ)[18] = 'between_sync15'
+names(dataHQ)[25] = 'within_sync15pls'
+names(dataHQ)[26] = 'between_sync15pls'
+names(dataHQ)[33] = 'within_sync15sezpls'
+names(dataHQ)[34] = 'between_sync15sezpls'
+
+dataNHQ = filter(data2, RER_32 == 0)
+names(dataNHQ)[10] = 'within_sync11'
+names(dataNHQ)[9] = 'between_sync11'
+names(dataNHQ)[18] = 'within_sync15'
+names(dataNHQ)[17] = 'between_sync15'
+names(dataNHQ)[26] = 'within_sync15pls'
+names(dataNHQ)[25] = 'between_sync15pls'
+names(dataNHQ)[34] = 'within_sync15sezpls'
+names(dataNHQ)[33] = 'between_sync15sezpls'
+
+data2 = rbind(dataHQ, dataNHQ)
+
+
+data2$diff.weekday.weekend.ratio = data2$weekday15/data2$weekend15 - data2$weekday11/data2$weekend11
+data2$diff.day.night.ratio = data2$day15/data2$night15 - data2$day11/data2$night11
+
+data2$diff.within.sync = data2$within_sync15sezpls - data2$within_sync11
+data2$diff.between.sync = data2$between_sync15sezpls - data2$between_sync11
+
+tit = paste('2015pls-2011/',month,':',type_of_norm,':',type_of_sync,sep='')
+
+g1 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.weekday.weekend.ratio)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g2 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.day.night.ratio)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g3 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g4 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+
+#grid.arrange(g1, g2, g3, g4,  nrow = 2)
+grid.arrange(g3, g4,  nrow = 1)
+}
+}
+
+
+```
+
+
+
+
+## Sync analysis
+
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+file2011 = paste('feat/SYNC/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015 = paste('feat/SYNC/MoQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2016 = paste('feat/SYNC/MoQuakeArea_2016',month,'16_2016',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2017 = paste('feat/SYNC/MoQuakeArea_2017',month,'16_2017',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('tract','within_sync11','between_sync11','RER_32','comune')
+
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('tract','within_sync15','between_sync15','RER_32','comune')
+
+
+
+
+data2016 = read.csv(file2016,stringsAsFactors = F)
+names(data2016) = c('tract','within_sync16','between_sync16','RER_32','comune')
+
+data2017 = read.csv(file2017,stringsAsFactors = F)
+names(data2017) = c('tract','within_sync17','between_sync17','RER_32','comune')
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011,data2015,data2016,data2017)) %>% filter(!is.na(RER_32))
+#data2 = data2011 %>% full_join(data2017) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+data2$diff.within.sync15_11 = data2$within_sync15 - data2$within_sync11
+data2$diff.between.sync15_11 = data2$between_sync15 - data2$between_sync11
+
+data2$diff.within.sync16_11 = data2$within_sync16 - data2$within_sync11
+data2$diff.between.sync16_11 = data2$between_sync16 - data2$between_sync11
+
+data2$diff.within.sync17_11 = data2$within_sync17 - data2$within_sync11
+data2$diff.between.sync17_11 = data2$between_sync17 - data2$between_sync11
+
+data2$diff.within.sync16_15 = data2$within_sync16 - data2$within_sync15
+data2$diff.between.sync16_15 = data2$between_sync16 - data2$between_sync15
+
+
+g.diff.within.sync15_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync15_11)) + geom_boxplot() + theme_bw() + ggtitle(paste('2015 - 2011',type_of_norm,type_of_sync))
+g.diff.between.sync15_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync15_11)) + geom_boxplot() + theme_bw() + ggtitle(paste('2015 - 2011',type_of_norm,type_of_sync))
+
+g.diff.within.sync16_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync16_11)) + geom_boxplot() + theme_bw() + ggtitle(paste('2016 - 2011',type_of_norm,type_of_sync))
+g.diff.between.sync16_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync16_11)) + geom_boxplot() + theme_bw() + ggtitle(paste('2016 - 2011',type_of_norm,type_of_sync))
+
+g.diff.within.sync17_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync17_11)) + geom_boxplot() + theme_bw() + ggtitle(paste('2017 - 2011',type_of_norm,type_of_sync))
+g.diff.between.sync17_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync17_11)) + geom_boxplot() + theme_bw() + ggtitle(paste('2017 - 2011',type_of_norm,type_of_sync))
+
+g.diff.within.sync16_15 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync16_15)) + geom_boxplot() + theme_bw() + ggtitle(paste('2016 - 2015',type_of_norm,type_of_sync))
+g.diff.between.sync16_15 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync16_15)) + geom_boxplot() + theme_bw() + ggtitle(paste('2016 - 2015',type_of_norm,type_of_sync))
+
+
+grid.arrange(g.diff.within.sync15_11,g.diff.between.sync15_11,nrow=1)
+#grid.arrange(g.diff.within.sync16_11,g.diff.between.sync16_11,nrow=1)
+#grid.arrange(g.diff.within.sync17_11,g.diff.between.sync17_11,nrow=1)
+#grid.arrange(g.diff.within.sync16_15,g.diff.between.sync16_15,nrow=1)
+
+}
+}
+
+
+```
+
+
+## Sync analysis PLS
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=F}
+
+
+
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+  file2011_v1 = paste('feat/SYNC/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+  file2011_v2 = paste('feat/SYNC/MoQuakeArea_20110401_20110417_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+  file2011_v3 = paste('feat/SYNC/MoQuakeArea_20110426_20110517_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+  
+  for(file2011 in c(file2011_v1,file2011_v2,file2011_v3)) {
+
+    
+    
+ 
+
+file2015pls = paste('feat/SYNC/MoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+file2015sezpls = paste('feat/SYNC/sezioniMoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+
+
+
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('tract','within_sync11','between_sync11','RER_32','comune')
+
+data2015pls = read.csv(file2015pls,stringsAsFactors = F)
+names(data2015pls) = c('tract','within_sync15pls','between_sync15pls','RER_32','comune')
+
+data2015sezpls = read.csv(file2015sezpls,stringsAsFactors = F)
+names(data2015sezpls) = c('tract','within_sync15sezpls','between_sync15sezpls','RER_32','comune')
+
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011,data2015pls,data2015sezpls)) %>% filter(!is.na(RER_32))
+#data2 = data2011 %>% full_join(data2017) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+data2$diff.within.sync15pls_11 = data2$within_sync15pls - data2$within_sync11
+data2$diff.between.sync15pls_11 = data2$between_sync15pls - data2$between_sync11
+
+data2$diff.within.sync15sezpls_11 = data2$within_sync15sezpls - data2$within_sync11
+data2$diff.between.sync15sezpls_11 = data2$between_sync15sezpls - data2$between_sync11
+
+ss = strsplit(file2011,'_')
+
+tit = paste('2015pls - [',ss[[1]][2],'_',ss[[1]][3],']\n',type_of_norm,type_of_sync)
+
+g.diff.within.sync15pls_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync15pls_11)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g.diff.between.sync15pls_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync15pls_11)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+tit = paste('2015sezpls - [',ss[[1]][2],'_',ss[[1]][3],']\n',type_of_norm,type_of_sync)
+
+g.diff.within.sync15sezpls_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync15sezpls_11)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g.diff.between.sync15sezpls_11 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync15sezpls_11)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+#grid.arrange(g.diff.within.sync15pls_11,g.diff.between.sync15pls_11,nrow=1)
+#grid.arrange(g.diff.within.sync15sezpls_11,g.diff.between.sync15sezpls_11,nrow=1)
+grid.arrange(g.diff.within.sync15pls_11,g.diff.within.sync15sezpls_11,nrow=1)
+
+data2_hq = filter(data2,RER_32==1)
+data2_nhq = filter(data2,RER_32==0)
+
+w = wilcox.test(data2_hq$diff.within.sync15sezpls_11, data2_nhq$diff.within.sync15sezpls_11)
+print(paste('diff.within.sync15sezpls_11',type_of_norm,type_of_sync))
+print(w)
+}
+}
+```
+
+## Corr with MUDE
+## Read MUDE Data
+
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=F,result='asis'}
+# compare our quake features with MUDE data
+# http://dati.emilia-romagna.it/dataset/contributi-assegnati-terremoto
+
+mude = read.csv2('other_data/contributi-terremoto.csv',sep='|')
+mude$COMUNE_DENOM = stringr::str_to_title(as.character(mude$COMUNE_DENOM))
+md = mude %>% dplyr::select(COMUNE_DENOM,COSTO_INTERVENTO,CONTRIBUTO) %>% group_by(COMUNE_DENOM) %>% summarise_all(funs(sum(., na.rm = TRUE)))
+md = md %>% mutate(COMUNE_DENOM = ifelse(COMUNE_DENOM=='Castello D\'argile','Castello D\'Argile',COMUNE_DENOM))
+md = md %>% mutate(COMUNE_DENOM = ifelse(COMUNE_DENOM=='Reggio Nell\'emilia','Reggio Nell\'Emilia',COMUNE_DENOM))
+md = md %>% mutate(COMUNE_DENOM = ifelse(COMUNE_DENOM=='Sant\'agata Bolognese','Sant\'Agata Bolognese',COMUNE_DENOM))
+md = md %>% mutate(COMUNE_DENOM = ifelse(COMUNE_DENOM=='Sant\'agostino','Sant\'Agostino',COMUNE_DENOM))
+
+
+# get data about population from ISTAT
+comuni = read.csv('other_data/comuni.csv',stringsAsFactors = F)
+comuni = comuni[comuni$Eta==999,]
+comuni = dplyr::select(comuni,c(Nome.Comune,Totale.Maschi,Totale.Femmine))
+comuni$TOT_PERS = comuni$Totale.Femmine + comuni$Totale.Maschi
+comuni$Nome.Comune = stringr::str_to_title(comuni$Nome.Comune)
+comuni = comuni %>% mutate(Nome.Comune = ifelse(Nome.Comune=='Castello D\'argile','Castello D\'Argile',Nome.Comune))
+comuni = comuni %>% mutate(Nome.Comune = ifelse(Nome.Comune=='Reggio Nell\'emilia','Reggio Nell\'Emilia',Nome.Comune))
+comuni = comuni %>% mutate(Nome.Comune = ifelse(Nome.Comune=='Sant\'agata Bolognese','Sant\'Agata Bolognese',Nome.Comune))
+comuni = comuni %>% mutate(Nome.Comune = ifelse(Nome.Comune=='Sant\'agostino','Sant\'Agostino',Nome.Comune))
+comuni = comuni %>% dplyr::select(-c(Totale.Maschi,Totale.Femmine))
+
+
+only_cat_E = T
+
+#https://openricostruzione.regione.emilia-romagna.it/open-data
+or = read.csv2('other_data/interventi_ricostruzioneprivata.csv',sep=';', stringsAsFactors = F)
+#names(or)
+if(only_cat_E) {
+  or = dplyr::select(or, c(COMUNE,LIVELLO_DANNO,TOT_UI_ABITANTI_COINVOLTI))
+  or$LIVELLO_DANNO = substr(or$LIVELLO_DANNO,1,1)
+  or = filter(or, LIVELLO_DANNO=='E') %>% dplyr::select(-LIVELLO_DANNO)
+} else {
+  or = dplyr::select(or, c(COMUNE,TOT_UI_ABITANTI_COINVOLTI))
+}
+
+or$COMUNE = stringr::str_to_title(or$COMUNE)
+
+#or = or %>% group_by(COMUNE,LIVELLO_DANNO) %>% summarise_all(funs(sum(., na.rm = TRUE)))
+or = or %>% group_by(COMUNE) %>% summarise_all(funs(sum(., na.rm = TRUE)))
+or = ungroup(or)
+or = or %>% mutate(COMUNE = ifelse(COMUNE=='Castello D\'argile','Castello D\'Argile',COMUNE))
+or = or %>% mutate(COMUNE = ifelse(COMUNE=='Reggio Nell\'emilia','Reggio Nell\'Emilia',COMUNE))
+or = or %>% mutate(COMUNE = ifelse(COMUNE=='Sant\'agata Bolognese','Sant\'Agata Bolognese',COMUNE))
+or = or %>% mutate(COMUNE = ifelse(COMUNE=='Sant\'agostino','Sant\'Agostino',COMUNE))
+
+md = md %>% left_join(comuni, by=c('COMUNE_DENOM'='Nome.Comune')) %>% left_join(or, by=c('COMUNE_DENOM'='COMUNE')) 
+```
+
+## Compare MUDE with YoY Data
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=F}
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+file2011 = paste('feat/FEAT/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015 = paste('feat/FEAT/MoQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2016 = paste('feat/FEAT/MoQuakeArea_2016',month,'16_2016',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2017 = paste('feat/FEAT/MoQuakeArea_2017',month,'16_2017',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('comune','RER_32','tot11','weekday11','weekend11','day11','night11','all.sync11','hquake.sync11','nohquake.sync11')
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('comune','RER_32','tot15','weekday15','weekend15','day15','night15','all.sync15','hquake.sync15','nohquake.sync15')
+data2016 = read.csv(file2016,stringsAsFactors = F)
+names(data2016) = c('comune','RER_32','tot16','weekday16','weekend16','day16','night16','all.sync16','hquake.sync16','nohquake.sync16')
+data2017 = read.csv(file2017,stringsAsFactors = F)
+names(data2017) = c('comune','RER_32','tot17','weekday17','weekend17','day17','night17','all.sync17','hquake.sync17','nohquake.sync17')
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011, data2015,data2016,data2017)) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+
+#data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% mutate_at(vars(COSTO_INTERVENTO,CONTRIBUTO), ~replace(., is.na(.), 0))
+data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% filter(!is.na(COSTO_INTERVENTO))
+
+data3$norm_costo = data3$COSTO_INTERVENTO / data3$night16
+data3$norm_conrib = data3$CONTRIBUTO / data3$night16
+
+
+dataHQ = filter(data3,RER_32 == 1)
+names(dataHQ)[9] = 'within_sync11'
+names(dataHQ)[10] = 'between_sync11'
+names(dataHQ)[17] = 'within_sync15'
+names(dataHQ)[18] = 'between_sync15'
+names(dataHQ)[25] = 'within_sync16'
+names(dataHQ)[26] = 'between_sync16'
+names(dataHQ)[33] = 'within_sync17'
+names(dataHQ)[34] = 'between_sync17'
+
+
+
+dataNHQ = filter(data3, RER_32 == 0)
+names(dataNHQ)[10] = 'within_sync11'
+names(dataNHQ)[9] = 'between_sync11'
+names(dataNHQ)[18] = 'within_sync15'
+names(dataNHQ)[17] = 'between_sync15'
+names(dataNHQ)[26] = 'within_sync16'
+names(dataNHQ)[25] = 'between_sync16'
+names(dataNHQ)[34] = 'within_sync17'
+names(dataNHQ)[33] = 'between_sync17'
+
+data3 = rbind(dataHQ, dataNHQ)
+
+data3$diff.tot = data3$tot15 - data3$tot11
+data3$diff.weekday = data3$weekday15 - data3$weekday11
+data3$diff.weekend = data3$weekend15 - data3$weekend11
+data3$diff.day = data3$day15 - data3$day11
+data3$diff.night = data3$night15 - data3$night11
+data3$diff.all.sync = data3$all.sync15 - data3$all.sync11
+data3$diff.within.sync = data3$within_sync15 - data3$within_sync11
+data3$diff.between.sync = data3$between_sync15 - data3$between_sync11
+
+
+data4 = dplyr::select(data3,-comune)
+data4 <- sapply( data4, as.numeric )
+m = cor(data4, use='pairwise.complete.obs')
+
+
+cat(paste('###',type_of_norm,type_of_sync,'\n'))
+
+par(mfrow=c(1,1)) 
+#corrplot(m,tl.cex = 0.5)
+#corrplot(m, type = "lower", tl.cex = 0.6, tl.srt = 45)
+
+
+#par(mfrow=c(1,2)) 
+#plot(data3$RER_32,data3$norm_conrib)
+#plot(data3$RER_32,data3$TOT_UI_ABITANTI_COINVOLTI)
+
+
+max_no_hq = max(filter(data3,RER_32==0)$CONTRIBUTO)
+data5 = filter(data3, CONTRIBUTO > max_no_hq)
+#data5 = filter(data3, RER_32==1)
+#data5 = data3
+
+par(mfrow=c(1,2)) 
+plot(data5$diff.within.sync,data5$CONTRIBUTO)
+legend("topright", title=paste("r =",round(cor(data5$diff.within.sync,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+
+plot(data5$within_sync15,data5$CONTRIBUTO)
+legend("topright", title=paste("r =",round(cor(data5$within_sync15,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+
+par(mfrow=c(1,1)) 
+
+}
+}
+
+```
+
+## Corr with MUDE with 2011 and 2015 PLS Data
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=F,result='asis'}
+
+
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+file2011_v1 = paste('feat/FEAT/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2011_v2 = paste('feat/FEAT/MoQuakeArea_20110401_20110417_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2011_v3 = paste('feat/FEAT/MoQuakeArea_20110426_20110517_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+for(file2011 in c(file2011_v1,file2011_v2,file2011_v3)) {
+
+file2015 = paste('feat/FEAT/MoQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015pls = paste('feat/FEAT/MoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+file2015sezpls = paste('feat/FEAT/sezioniMoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+
+
+
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('comune','RER_32','tot11','weekday11','weekend11','day11','night11','all.sync11','hquake.sync11','nohquake.sync11')
+
+data2015pls = read.csv(file2015pls,stringsAsFactors = F)
+names(data2015pls) = c('comune','RER_32','tot15pls','weekday15pls','weekend15pls','day15pls','night15pls','all.sync15pls','hquake.sync15pls','nohquake.sync15pls')
+
+data2015sezpls = read.csv(file2015sezpls,stringsAsFactors = F)
+names(data2015sezpls) = c('comune','RER_32','tot15sezpls','weekday15sezpls','weekend15sezpls','day15sezpls','night15sezpls','all.sync15sezpls','hquake.sync15sezpls','nohquake.sync15sezpls')
+
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011, data2015pls,data2015sezpls)) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+
+#data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% mutate_at(vars(COSTO_INTERVENTO,CONTRIBUTO), ~replace(., is.na(.), 0))
+data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% filter(!is.na(COSTO_INTERVENTO))
+
+data3$norm_costo = data3$COSTO_INTERVENTO / data3$night15pls
+data3$norm_conrib = data3$CONTRIBUTO / data3$night15pls
+
+
+dataHQ = filter(data3,RER_32 == 1)
+names(dataHQ)[9] = 'within_sync11'
+names(dataHQ)[10] = 'between_sync11'
+names(dataHQ)[17] = 'within_sync15pls'
+names(dataHQ)[18] = 'between_sync15pls'
+names(dataHQ)[25] = 'within_sync15sezpls'
+names(dataHQ)[26] = 'between_sync15sezpls'
+
+
+
+dataNHQ = filter(data3, RER_32 == 0)
+names(dataNHQ)[10] = 'within_sync11'
+names(dataNHQ)[9] = 'between_sync11'
+names(dataNHQ)[18] = 'within_sync15pls'
+names(dataNHQ)[17] = 'between_sync15pls'
+names(dataNHQ)[26] = 'within_sync15sezpls'
+names(dataNHQ)[25] = 'between_sync15sezpls'
+
+
+data3 = rbind(dataHQ, dataNHQ)
+
+data3$diff.tot = data3$tot15pls - data3$tot11
+data3$diff.weekday = data3$weekday15pls - data3$weekday11
+data3$diff.weekend = data3$weekend15pls - data3$weekend11
+data3$diff.day = data3$day15pls - data3$day11
+data3$diff.night = data3$night15pls - data3$night11
+data3$diff.all.sync = data3$all.sync15pls - data3$all.sync11
+data3$diff.within.sync = data3$within_sync15sezpls - data3$within_sync11
+data3$diff.between.sync = data3$between_sync15sezpls - data3$between_sync11
+
+
+data4 = dplyr::select(data3,-comune)
+data4 <- sapply( data4, as.numeric )
+m = cor(data4, use='pairwise.complete.obs')
+
+cat(paste('###',type_of_norm,type_of_sync,'\n'))
+
+
+par(mfrow=c(1,1)) 
+#corrplot(m,tl.cex = 0.5)
+#corrplot(m, type = "lower", tl.cex = 0.6, tl.srt = 45)
+
+
+#par(mfrow=c(1,2)) 
+#plot(data3$RER_32,data3$norm_conrib)
+#plot(data3$RER_32,data3$TOT_UI_ABITANTI_COINVOLTI)
+
+
+#max_no_hq = max(filter(data3,RER_32==0)$CONTRIBUTO)
+#data5 = filter(data3, CONTRIBUTO > max_no_hq)
+#data5 = filter(data3, RER_32==1)
+data5 = data3
+
+par(mfrow=c(1,2)) 
+plot(data5$diff.within.sync,data5$CONTRIBUTO)
+legend("topright", title=paste("r =",round(cor(data5$diff.within.sync,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+
+plot(data5$within_sync15sezpls,data5$CONTRIBUTO)
+legend("topright", title=paste("r =",round(cor(data5$within_sync15sezpls,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+
+par(mfrow=c(1,1)) 
+
+m = lm(data5$CONTRIBUTO~data5$diff.within.sync)
+summary(m)
+}
+}
+
+
+```
+
+## Corr with MUDE SYNC data
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=F,result='asis'}
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+file2011 = paste('feat/SYNC/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015 = paste('feat/SYNC/MoQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2016 = paste('feat/SYNC/MoQuakeArea_2016',month,'16_2016',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2017 = paste('feat/SYNC/MoQuakeArea_2017',month,'16_2017',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('tract','within_sync11','between_sync11','RER_32','comune')
+
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('tract','within_sync15','between_sync15','RER_32','comune')
+
+data2016 = read.csv(file2016,stringsAsFactors = F)
+names(data2016) = c('tract','within_sync16','between_sync16','RER_32','comune')
+
+data2017 = read.csv(file2017,stringsAsFactors = F)
+names(data2017) = c('tract','within_sync17','between_sync17','RER_32','comune')
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011,data2015,data2016,data2017)) %>% filter(!is.na(RER_32)) %>% filter(!is.na(within_sync15))
+#data2 = data2011 %>% full_join(data2017) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+#data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% mutate_at(vars(COSTO_INTERVENTO,CONTRIBUTO), ~replace(., is.na(.), 0))
+data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% filter(!is.na(COSTO_INTERVENTO))
+
+data3$norm_costo = data3$COSTO_INTERVENTO / data3$TOT_PERS
+data3$norm_conrib = data3$CONTRIBUTO / data3$TOT_PERS
+
+
+data3$diff.within.sync15_11 = data3$within_sync15 - data3$within_sync11
+data3$diff.between.sync15_11 = data3$between_sync15 - data3$between_sync11
+
+data3$diff.within.sync16_11 = data3$within_sync16 - data3$within_sync11
+data3$diff.between.sync16_11 = data3$between_sync16 - data3$between_sync11
+
+data3$diff.within.sync17_11 = data3$within_sync17 - data3$within_sync11
+data3$diff.between.sync17_11 = data3$between_sync17 - data3$between_sync11
+
+
+data4 = dplyr::select(data3,-c(tract,comune))
+data4 <- sapply( data4, as.numeric )
+m = cor(data4,use = 'pairwise.complete.obs')
+
+
+
+
+par(mfrow=c(1,1)) 
+#corrplot(m,tl.cex = 0.5)
+#corrplot(m, type = "lower", tl.cex = 0.6, tl.srt = 45)
+
+
+#par(mfrow=c(1,2)) 
+#plot(data3$RER_32,data3$norm_conrib)
+#plot(data3$RER_32,data3$TOT_UI_ABITANTI_COINVOLTI)
+
+
+max_no_hq = max(filter(data3,RER_32==0)$CONTRIBUTO)
+data5 = filter(data3, CONTRIBUTO > max_no_hq)
+#data5 = filter(data3, RER_32==1)
+#data5 = data3
+
+par(mfrow=c(1,2)) 
+plot(data5$diff.within.sync15_11,data5$CONTRIBUTO,main=paste(type_of_norm,type_of_sync))
+legend("topright", title=paste("r =",round(cor(data5$diff.within.sync15_11,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+
+plot(data5$within_sync17,data5$CONTRIBUTO,main=paste(type_of_norm,type_of_sync))
+legend("topright", title=paste("r =",round(cor(data5$within_sync17,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+
+par(mfrow=c(1,1)) 
+
+m = lm(data5$CONTRIBUTO~data5$diff.within.sync15_11)
+summary(m)
+
+}
+}
+
+```
+
+## Corr with MUDE SYNC PLS Data
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=F, results='asis'}
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+#file2011 = paste('feat/SYNC/MoQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+#file2011 = paste('feat/SYNC/MoQuakeArea_20110401_20110417_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+file2011 = paste('feat/SYNC/MoQuakeArea_20110426_20110517_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+
+ 
+
+file2015pls = paste('feat/SYNC/MoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+file2015sezpls = paste('feat/SYNC/sezioniMoQuakeArea_20150401_00_20150522_00_PLS_',type_of_norm,'_',type_of_sync,sep='')
+
+
+data2011 = read.csv(file2011,stringsAsFactors = F)
+names(data2011) = c('tract','within_sync11','between_sync11','RER_32','comune')
+
+data2015pls = read.csv(file2015pls,stringsAsFactors = F)
+names(data2015pls) = c('tract','within_sync15pls','between_sync15pls','RER_32','comune')
+
+data2015sezpls = read.csv(file2015sezpls,stringsAsFactors = F)
+names(data2015sezpls) = c('tract','within_sync15sezpls','between_sync15sezpls','RER_32','comune')
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2011,data2015pls,data2015sezpls)) %>% filter(!is.na(RER_32)) %>% filter(!is.na(within_sync15pls))
+#data2 = data2011 %>% full_join(data2017) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+#data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% mutate_at(vars(COSTO_INTERVENTO,CONTRIBUTO), ~replace(., is.na(.), 0))
+data3 = data2 %>% left_join(md, by=c('comune'='COMUNE_DENOM')) %>% filter(!is.na(COSTO_INTERVENTO))
+
+data3$norm_costo = data3$COSTO_INTERVENTO / data3$TOT_PERS
+data3$norm_conrib = data3$CONTRIBUTO / data3$TOT_PERS
+
+
+data3$diff.within.sync15pls_11 = data3$within_sync15pls - data3$within_sync11
+data3$diff.between.sync15pls_11 = data3$between_sync15pls - data3$between_sync11
+
+data3$diff.within.sync15sezpls_11 = data3$within_sync15sezpls - data3$within_sync11
+data3$diff.between.sync15sezpls_11 = data3$between_sync15sezpls - data3$between_sync11
+
+
+
+data4 = dplyr::select(data3,-c(tract,comune))
+data4 <- sapply( data4, as.numeric )
+m = cor(data4,use = 'pairwise.complete.obs')
+
+
+
+
+par(mfrow=c(1,1)) 
+#corrplot(m,tl.cex = 0.5)
+#corrplot(m, type = "lower", tl.cex = 0.6, tl.srt = 45)
+
+
+#par(mfrow=c(1,2)) 
+#plot(data3$RER_32,data3$norm_conrib)
+#plot(data3$RER_32,data3$TOT_UI_ABITANTI_COINVOLTI)
+
+
+#max_no_hq = max(filter(data3,RER_32==0)$CONTRIBUTO)
+#data5 = filter(data3, CONTRIBUTO > max_no_hq)
+#data5 = filter(data3, RER_32==1)
+data5 = data3
+
+par(mfrow=c(1,2)) 
+plot(data5$diff.within.sync15sezpls_11,data5$CONTRIBUTO, main=paste(type_of_norm,type_of_sync))
+legend("topright", title=paste("r =",round(cor(data5$diff.within.sync15sezpls_11,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+plot(data5$within_sync15sezpls,data5$CONTRIBUTO,main=paste(type_of_norm,type_of_sync))
+legend("topright", title=paste("r =",round(cor(data5$within_sync15sezpls,data5$CONTRIBUTO, use="pairwise.complete.obs"),2)),legend = '')
+par(mfrow=c(1,1)) 
+
+
+m = lm(data5$CONTRIBUTO~data5$diff.within.sync15sezpls_11)
+summary(m)
+
+}
+}
+
+```
+
+
+## THE END
+
+
+
+
+
+

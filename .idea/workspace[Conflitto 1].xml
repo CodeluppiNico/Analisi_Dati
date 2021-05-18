@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fdb2928f-ba6e-4d07-bf9d-b5f1f0bb7fa4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1ppizf5wrryy5kDkJWoJHV1SEnb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fdb2928f-ba6e-4d07-bf9d-b5f1f0bb7fa4" name="Default Changelist" comment="" />
+      <created>1615886695544</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615886695544</updated>
+      <workItem from="1615886696625" duration="868000" />
+      <workItem from="1615900477561" duration="2130000" />
+      <workItem from="1615905293218" duration="937000" />
+      <workItem from="1615906481819" duration="1873000" />
+      <workItem from="1615909169940" duration="2456000" />
+      <workItem from="1615911673891" duration="493000" />
+      <workItem from="1615912207101" duration="3211000" />
+      <workItem from="1615988025571" duration="12113000" />
+      <workItem from="1616006301873" duration="93000" />
+      <workItem from="1616074765200" duration="13651000" />
+      <workItem from="1616159057432" duration="5781000" />
+      <workItem from="1616232036764" duration="1455000" />
+      <workItem from="1616426198054" duration="5305000" />
+      <workItem from="1616431886815" duration="421000" />
+      <workItem from="1616432687185" duration="1092000" />
+      <workItem from="1616508142123" duration="5221000" />
+      <workItem from="1616513591148" duration="1135000" />
+      <workItem from="1616514753281" duration="7866000" />
+      <workItem from="1616592939278" duration="6510000" />
+      <workItem from="1616684518338" duration="6128000" />
+      <workItem from="1616765273470" duration="9054000" />
+      <workItem from="1616775131778" duration="2277000" />
+      <workItem from="1617028359795" duration="173000" />
+      <workItem from="1617028621688" duration="7578000" />
+      <workItem from="1617115338556" duration="4594000" />
+      <workItem from="1617120056758" duration="2184000" />
+      <workItem from="1617287777168" duration="9186000" />
+      <workItem from="1617718984840" duration="8243000" />
+      <workItem from="1617807923054" duration="889000" />
+      <workItem from="1617809418323" duration="2936000" />
+      <workItem from="1617885296625" duration="5226000" />
+      <workItem from="1617890750241" duration="926000" />
+      <workItem from="1618239029314" duration="1274000" />
+      <workItem from="1618325686703" duration="1732000" />
+      <workItem from="1618404221153" duration="6383000" />
+      <workItem from="1618410980549" duration="10220000" />
+      <workItem from="1618490255269" duration="8267000" />
+      <workItem from="1618578453644" duration="1911000" />
+      <workItem from="1618580594764" duration="2755000" />
+      <workItem from="1618583394738" duration="408000" />
+      <workItem from="1618583819935" duration="2082000" />
+      <workItem from="1618585934517" duration="992000" />
+      <workItem from="1618592735448" duration="554000" />
+      <workItem from="1618835461079" duration="253000" />
+      <workItem from="1618835727215" duration="3974000" />
+      <workItem from="1618839762387" duration="613000" />
+      <workItem from="1618840405266" duration="3835000" />
+      <workItem from="1618844343474" duration="3400000" />
+      <workItem from="1618860544483" duration="56000" />
+      <workItem from="1618923184140" duration="780000" />
+      <workItem from="1618923976751" duration="2154000" />
+      <workItem from="1618926179184" duration="2532000" />
+      <workItem from="1618928786008" duration="1622000" />
+      <workItem from="1619094795061" duration="12900000" />
+      <workItem from="1619181099282" duration="6604000" />
+      <workItem from="1619278105055" duration="738000" />
+      <workItem from="1620460680140" duration="127000" />
+      <workItem from="1620460916845" duration="147000" />
+      <workItem from="1620488559966" duration="252000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

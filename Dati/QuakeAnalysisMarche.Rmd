@@ -1,0 +1,202 @@
+---
+title: "Analisi di Dati Terremoto Marche 2016"
+author: "Marco Mamei"
+date: "27-7-2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+output = "HTML" # Imposto una voarabile per decidere che tipo di output usare in knit
+```
+
+## Importazione di Librerie
+
+
+```{r, echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+# operazioni su data-frame
+library(dplyr)
+library(tidyr)
+library(broom)
+
+# visualizzazione
+library(ggplot2)
+library(gridExtra)
+library(ggmap)
+library(corrplot)
+library(rgdal)
+library(sp)
+library(rgeos)
+library(maptools)
+library(leaflet)
+library(leaflet.minicharts)
+library(RColorBrewer)
+```
+
+### Imposto i paramteri
+
+```{r, echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+
+# Params
+months = c('04','05','09')
+#type_of_norm = 'none|stl|divbymean'
+#type_of_sync = 'maxccf|mi|dtw' 
+ 
+norm_sync_m = matrix(c('none','maxccf',
+                       'stl','maxccf',
+                       'divbymean','maxccf',
+                       'divbymean','mi',
+                       'divbymean','dtw'), ncol=2, byrow=T)
+
+```
+
+
+
+## Focus on YoY differences
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+
+file2015 = paste('feat/FEAT/MarcheQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2016 = paste('feat/FEAT/MarcheQuakeArea_2016',month,'16_2016',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2017 = paste('feat/FEAT/MarcheQuakeArea_2017',month,'16_2017',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+
+
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('comune','RER_32','tot15','weekday15','weekend15','day15','night15','all.sync15','hquake.sync15','nohquake.sync15')
+
+data2016= read.csv(file2016,stringsAsFactors = F)
+names(data2016) = c('comune','RER_32','tot16','weekday16','weekend16','day16','night16','all.sync16','hquake.sync16','nohquake.sync16')
+
+data2017 = read.csv(file2017,stringsAsFactors = F)
+names(data2017) = c('comune','RER_32','tot17','weekday17','weekend17','day17','night17','all.sync17','hquake.sync17','nohquake.sync17')
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2015,data2016,data2017)) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+dataHQ = filter(data2,RER_32 == 1)
+names(dataHQ)[9] = 'within_sync15'
+names(dataHQ)[10] = 'between_sync15'
+names(dataHQ)[17] = 'within_sync16'
+names(dataHQ)[18] = 'between_sync16'
+names(dataHQ)[25] = 'within_sync17'
+names(dataHQ)[26] = 'between_sync17'
+
+dataNHQ = filter(data2, RER_32 == 0)
+names(dataNHQ)[10] = 'within_sync15'
+names(dataNHQ)[9] = 'between_sync15'
+names(dataNHQ)[18] = 'within_sync16'
+names(dataNHQ)[17] = 'between_sync16'
+names(dataNHQ)[26] = 'within_sync17'
+names(dataNHQ)[25] = 'between_sync17'
+
+data2 = rbind(dataHQ, dataNHQ)
+
+
+data2$diff.within.sync.16_15 = data2$within_sync16 - data2$within_sync15
+data2$diff.between.sync.16_15 = data2$between_sync16 - data2$between_sync15
+
+data2$diff.within.sync.17_16 = data2$within_sync17 - data2$within_sync16
+data2$diff.between.sync.17_16 = data2$between_sync17 - data2$between_sync16
+
+data2$diff.within.sync.17_15 = data2$within_sync17 - data2$within_sync15
+data2$diff.between.sync.17_15 = data2$between_sync17 - data2$between_sync15
+
+
+data2$diff.night.17_15 = data2$night17 - data2$night15
+
+tit = paste('2017 - 2015',month,type_of_norm,type_of_sync)
+
+g1 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync.17_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g2 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync.17_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+grid.arrange(g1, g2,  nrow = 1)
+
+
+g3 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.night.17_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+
+}
+}
+
+```
+
+
+## Sync analysis
+
+
+```{r,echo=FALSE, warning=FALSE,error=FALSE,message=FALSE}
+
+for(month in months) {
+for(i in seq(1,nrow(norm_sync_m))) {
+  type_of_norm = norm_sync_m[i,][1]
+  type_of_sync = norm_sync_m[i,][2]
+
+file2011 = paste('feat/SYNC/MarcheQuakeArea_2011',month,'16_2011',month,'27_NewSpeechCalls_24_',type_of_norm,'_',type_of_sync,sep='')
+file2015 = paste('feat/SYNC/MarcheQuakeArea_2015',month,'16_2015',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2016 = paste('feat/SYNC/MarcheQuakeArea_2016',month,'16_2016',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+file2017 = paste('feat/SYNC/MarcheQuakeArea_2017',month,'16_2017',month,'27_24_',type_of_norm,'_',type_of_sync,sep='')
+
+
+data2015 = read.csv(file2015,stringsAsFactors = F)
+names(data2015) = c('tract','within_sync15','between_sync15','RER_32','comune')
+
+data2016 = read.csv(file2016,stringsAsFactors = F)
+names(data2016) = c('tract','within_sync16','between_sync16','RER_32','comune')
+
+data2017 = read.csv(file2017,stringsAsFactors = F)
+names(data2017) = c('tract','within_sync17','between_sync17','RER_32','comune')
+
+
+
+
+data2 = Reduce(function(x,y) full_join(x,y,all=T),list(data2015,data2016,data2017)) %>% filter(!is.na(RER_32))
+#data2 = data2011 %>% full_join(data2017) %>% filter(!is.na(RER_32))
+data2$RER_32 = as.character(data2$RER_32)
+
+
+data2$diff.within.sync16_15 = data2$within_sync16 - data2$within_sync15
+data2$diff.between.sync16_15 = data2$between_sync16 - data2$between_sync15
+
+data2$diff.within.sync17_15 = data2$within_sync17 - data2$within_sync15
+data2$diff.between.sync17_15 = data2$between_sync17 - data2$between_sync15
+
+
+tit = paste('2016 - 2015',month,type_of_norm,type_of_sync)
+
+g.diff.within.sync16_15 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync16_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g.diff.between.sync16_15 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync16_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+tit = paste('2017 - 2015',month,type_of_norm,type_of_sync)
+
+g.diff.within.sync17_15 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.within.sync17_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+g.diff.between.sync17_15 = ggplot(data2, aes(x = RER_32, group=RER_32, y=diff.between.sync17_15)) + geom_boxplot() + theme_bw() + ggtitle(tit)
+
+
+grid.arrange(g.diff.within.sync16_15,g.diff.between.sync16_15,
+             g.diff.within.sync17_15,g.diff.between.sync17_15, nrow = 2)
+
+
+}
+}
+
+
+```
+
+## THE END
+
+
+
+
+
+

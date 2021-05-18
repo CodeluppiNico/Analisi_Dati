@@ -1,0 +1,407 @@
+---
+title: "Analisi di Dati Telecom"
+author: "Marco Mamei"
+date: "7-7-2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+output = "HTML" # Imposto una voarabile per decidere che tipo di output usare in knit
+```
+
+## Importazione di Librerie
+
+Importiamo le librerie necessarie:
+
+```{r, echo=TRUE, warning=FALSE,error=FALSE,message=FALSE}
+
+# serie temporali
+library(lubridate)
+library(zoo)
+library(tseries)
+
+# operazioni su data-frame
+library(dplyr)
+library(tidyr)
+library(broom)
+
+# machine learning (modelli per le serie temporali, e computazione multicore)
+library(forecast)
+library(parallel)
+
+# visualizzazione
+library(ggplot2)
+library(ggmap)
+library(corrplot)
+library(rgdal)
+library(sp)
+library(maptools)
+library(leaflet)
+library(RColorBrewer)
+
+
+
+
+```
+
+## Importazione Dati
+
+Carichiamo il file in un data frame
+
+
+```{r}
+file = 'timeseries/Parma_20170416_20170417'
+ts_freq = 4*24
+#file = "timeseries/Modena_20170416_20170817_24"
+#ts_freq = 24
+data = read.csv(file,header=FALSE,stringsAsFactors=FALSE, na.strings = c("65535","65535.0"))
+names(data) = c("time","cell","value")
+data$rtime = as.POSIXct(fast_strptime(data$time, "%Y%m%d_%H%M"))
+head(data)
+
+max(data$value, na.rm = T)
+
+```
+
+## Visualizziamo la mppa della città.
+
+Carico il file SHP con la mappa della città. 
+Questo file si può aprire anche con QGIS.
+
+Visualizzo la girglia sulla città tramite la libreria leaflet.
+La visualizzazione con il packge leaflet è compatibile solo con l'output Knit in HTML.
+Posso cliccare sui vari "pixel" per scoprire il loro ID.
+
+```{r}
+
+
+shpFile = "shp/Parma1.shp"
+#shpFile = "ModenaLG1.shp"
+z <- readShapePoly(shpFile,IDvar="SP_ID")
+
+if(output == "HTML") {
+  leaflet(z) %>%
+  addPolygons(stroke = TRUE, color = "#000", weight=1, 
+              fillOpacity = 0.5, fillColor = "#03F", smoothFactor = 0.5,
+              popup = ~SP_ID) %>%
+  addTiles() #adds a map tile, the default is OpenStreetMap
+} else {
+  plot(z)
+}
+
+```
+
+
+## Visualizziamo le serie temporali di alcuni pixel sul territorio.
+
+Seleziono il pixel 273-674
+
+```{r}
+
+id = "273-674"
+x = ts(filter(data,cell==id)$value, freq=1)
+x = x / 10 * 3
+plot(x,main=id,ylab="num. people",xlab="time (weeks)")
+
+filter(data,data$value == max(data$value, na.rm = T))
+
+
+```
+
+Vedo che il grafico presenta molti "buchi" valori NA.
+
+
+
+```{r}
+sum(is.na(x))
+length(x)
+```
+
+Elimino i valri NA per interpolazione
+
+
+```{r}
+# ?na.approx
+id = "398-1038"
+x = ts(filter(data,cell==id)$value, freq=ts_freq)
+x = x / 10 * 3
+x = na.approx(x)
+plot(x,main=id,ylab="num. people",xlab="time (weeks)")
+
+```
+
+Vediamo altri pixel
+
+
+```{r}
+id = "392-1040"
+x = ts(filter(data,cell==id)$value, freq=ts_freq)
+x = x / 10 * 3
+x = na.approx(x)
+plot(x,main=id,ylab="num. people",xlab="time (weeks)")
+
+id = "394-1028"
+x = ts(filter(data,cell==id)$value, freq=ts_freq)
+x = x / 10 * 3
+#x = na.approx(x)
+plot(x,main=id,ylab="num. people",xlab="time (weeks)")
+
+plot(window(x,start=11.3,end=12),main=id,ylab="num. people",xlab="time (days)")
+
+```
+
+
+
+
+
+## Identificazione Eventi
+
+Creiamo una semplice procedura automatica per trovare eventi (i.e., situazioni anomale sovraaffollate) in una cella.
+(contributo di Federico Berlingeri)
+
+```{r, echo=FALSE}
+
+boxplot(data$value)
+max(data$value, na.rm = T)
+filter(data,value==max(data$value, na.rm = T))
+
+id = "395-1029"
+x = ts(filter(data,cell==id)$value, freq=7*4*24)
+#x = x / 10 * 3
+x = na.approx(x)
+
+outlier = boxplot.stats(x)$out
+
+y = ifelse(x %in% outlier, 1 , 0)
+
+plot(x)
+par(new = T)
+plot(y,axes=F, xlab=NA, ylab=NA)
+
+
+```
+
+
+## Visualizziamo la mappa della città (Colorpleth)
+
+Visualizzo la città colorando con secondo il numero di persone presenti
+
+il nostro oggetto z è della classe "SpatialPolygonsDataFrame" contiene diversi campi accessibili tramite il carattere @.
+In particolre z@data permette di accedere ai dati nel data frame vero e proprio. Ogni riga del dataframe è associata ad un elemento geografico (z@polygons fa vedere invece le coordinate).
+
+Devo fare un join tra z@data e data in modo da avere in un unico oggetto le coodinate geografiche e i dati di popolazione
+
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+z <- readShapePoly(shpFile,IDvar="SP_ID")
+head(z@data)
+head(data)
+
+data_day = filter(data,time=="20170416_0900")
+z@data$cell = as.character(z@data$SP_ID) # z@data$SP_ID è un factor e non riuscirei a fare il join 
+#?left_join
+z@data = z@data %>% left_join(data_day) %>% select(-val)
+head(z@data)
+
+qpal = colorNumeric("Blues",z@data$value,na.color = "#FFFFFF")
+
+if(output == "HTML") {
+  leaflet(z) %>%
+  addPolygons(stroke = TRUE, color = qpal(z$value), weight=1, fillOpacity = 0.5, 
+              smoothFactor = 0.5,popup= paste(z$cell," value ",z$value)) %>%
+  addTiles() %>% 
+  #addTiles(urlTemplate="http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png") %>%
+  addLegend("bottomright", pal = qpal, values = ~value,title = "n. persons",opacity = 1)
+} else {
+  #plot(z,col= qpal(z$value))
+  bbox = data.frame(10.886880,44.617892,10.953896,44.657667)
+  tmap = tidy(z)
+  tmap = tmap %>% inner_join(data_day,by=c("id"="cell"))
+  names(bbox) = c("ll.lon","ll.lat","ur.lon","ur.lat")
+  amap = get_map(location = z@bbox, source="stamen", maptype="toner",color="bw",crop=TRUE)
+  ggmap(amap, extent = "normal", maprange = FALSE) +
+  #ggplot()+
+  geom_polygon(data = tmap,
+               aes(long, lat, group = group, fill=value),
+               colour = "black", alpha = 0.5) +
+  theme_bw() +
+  scale_fill_distiller(palette='Blues',direction=1)+
+  coord_map(projection="mercator",
+            xlim=c(attr(amap, "bb")$ll.lon, attr(amap, "bb")$ur.lon),
+            ylim=c(attr(amap, "bb")$ll.lat, attr(amap, "bb")$ur.lat)) 
+  
+}
+
+```
+
+
+## Vogliamo provare a predire il numero di persone su una cella.
+
+Utilizziamo un modello lineare.
+Chiamo F (dal parametro freq di ts) il numero di seasonal periods nella serie temporale.
+
+
+$$
+y_t = \beta_0 + \beta_1 \cdot t + \sum_i^{F} \beta_i \cdot d_{it}
+$$
+
+$d_{it} =  1$ se $t$ è nel periodo $i$, $0$ altrimenti.   
+
+
+La funzione tslm è come la funzione lm, ma permette di creare in modo automatico le variabili $d_{it}$ associate a tutti i seasonal periods della serie temporale. 
+
+Per chi vuole approfondire questo è un libro veramente fantastico:
+
+https://www.otexts.org/fpp
+
+https://www.otexts.org/fpp2 (2 edizione, in corso di completamento)
+
+
+
+
+
+
+```{r}
+
+id = "398-1038"
+y = ts(filter(data,cell==id)$value, freq=7*4*24)
+y = y / 10 * 3
+y = na.approx(y)
+
+#fit = stlf(x)
+#fit = stlf(sts,method="arima")
+fit <- tslm(y ~ trend + season)
+#summary(fit)
+plot(forecast(fit,h=3*7*24*4))
+accuracy(fit)
+
+
+
+days.ts =ts(matrix(0,ncol=7,nrow=length(y)),freq=7*24*4)
+for(i in 1:7) {
+  days.ts[,i] = cycle(y) >= (i-1)*24*7 & cycle(y) < i*24*7
+}
+fit <- tslm(y ~ days.ts)
+plot(forecast(fit,h=length(y)))
+
+
+
+h.ts =ts(matrix(0,ncol=24,nrow=length(y)),freq=24*4)
+for(i in 1:24) {
+  h.ts[,i] = cycle(h.ts[,i]) >= (i-1)*4 & cycle(h.ts[,i]) < i*4
+}
+fit <- tslm(y ~ h.ts)
+plot(forecast(fit,h=length(y)))
+
+
+```
+
+Ci sono molte covariate (674). Potremmo sicuramente usarne molte meno, ma a quel punto dovremmo costruirci noi le variabili seasonal.
+
+
+Abbiamo valitato l'accuracy sul training set.
+Dividiamo in training e test set.
+
+
+
+```{r}
+
+id = "398-1038"
+y = ts(filter(data,cell==id)$value, freq=7*4*24)
+y = y / 10 * 3
+y = na.approx(y)
+
+train = window(y,end=c(4,480))
+test = window(y,start=c(4,480))
+
+#fit = stlf(train)
+#fit = stlf(train,method="arima")
+fit <- tslm(train ~ trend + season)
+#summary(fit)
+fcast = forecast(fit,h=length(test))
+plot(fcast)
+lines(y)
+accuracy(fcast,test)
+#mean(abs(fcast$mean - test))
+
+boxplot(abs(fcast$mean - test))
+
+```
+
+## Siamo stati fortunati nella scelta della cella?
+
+
+Vogliamo applicare la classificazione a tutte le celle.
+R non gestisce i cicli (es. for) in modo efficace, ma usa le funzioni vettorizzate.
+Dobbiamo defnine una funzione che effettui la predizione su una cella. 
+Quindi usare una delle funzioni apply di R per applicare la funzione di predizione a tutti gli elementi
+
+
+Per eseguire la funzione più velocemente, creiamo un sample delle celle
+
+
+```{r}
+
+cells = data %>% distinct(cell) %>% select(cell)
+sample = sample(cells$cell,10)
+ss = as.data.frame(sample,stringsAsFactors = F)
+names(ss) = c("cell")
+data.sample = semi_join(data,ss)
+
+
+fcast = function(cellx) {
+  df = filter(data.sample,cell==cellx) %>% select(rtime,value)
+  y = ts(na.approx(df[,2]), freq=7*4*24)
+  train = window(y,end=c(4,480))
+  test = window(y,start=c(4,480))
+  fit <- tslm(train ~ trend + season)
+  fcast = forecast(fit,h=length(test))
+  #fit.e = stlf(train)
+  #fit.a = stlf(train,method="arima")
+  acc = accuracy(fcast,test)
+  acc1 = matrix(c(acc[1,],acc[2,]),1,16,byrow = TRUE)
+  colnames(acc1) = c(colnames(acc),paste("tst",colnames(acc),sep="."))
+  return(data.frame(cellx,acc1,stringsAsFactors = F)) 
+}
+
+res1 = fcast(sample[1])
+res = lapply(sample,fcast) # for each cell in sample apply fcast
+resall = res %>% rbind_all()
+
+boxplot(resall$tst.MAE)
+
+
+
+```
+
+Analizziamo meglio gli outlier di questo box plot
+
+
+```{r}
+
+out = filter(resall,tst.MAE==max(resall$tst.MAE))
+
+
+
+id = out$cellx
+y = ts(filter(data,cell==id)$value, freq=7*4*24)
+y = y / 10 * 3
+y = na.approx(y)
+
+train = window(y,end=c(4,480))
+test = window(y,start=c(4,480))
+
+#fit = stlf(train)
+#fit = stlf(train,method="arima")
+fit <- tslm(train ~ trend + season)
+#summary(fit)
+fcast = forecast(fit,h=length(test))
+plot(fcast)
+lines(y)
+
+boxplot(abs(fcast$mean - test))
+
+```

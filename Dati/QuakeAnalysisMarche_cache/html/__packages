@@ -1,0 +1,16 @@
+base
+dplyr
+tidyr
+broom
+ggplot2
+gridExtra
+ggmap
+corrplot
+sp
+rgdal
+rgeos
+maptools
+leaflet
+leaflet.minicharts
+RColorBrewer
+bindrcpp
