@@ -3,7 +3,28 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\Grezzo Niki\Camerino.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Selini\istat\BilancioDemografico-SingolaArea-Comuni_Ancona\BilancioDemografico-SingolaArea-Comune_001001-Agliè.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Studio Dati\risultati_terremoto\CentroItalia_20150401_20150430_24.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Studio Dati\risultati_terremoto\CentroItalia_20151016_20151030_24.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
