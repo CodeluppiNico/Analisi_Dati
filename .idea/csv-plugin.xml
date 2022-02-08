@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Studio Dati\risultati_terremoto\CentroItalia_20150924_20150930_24.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Studio Dati\risultati_terremoto\CentroItalia_20151016_20151030_24.csv">
           <value>
             <Attribute>
