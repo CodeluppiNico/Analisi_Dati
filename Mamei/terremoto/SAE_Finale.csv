@@ -1,0 +1,229 @@
+ID_CONT;Regione;Comune;Localita;Nome Area;Numero Sae ordinate ;Numero Sae 40 mq;Numero Sae 60 mq;Numero Sae 80 mq;Consegna area idonea ;Inizio Urbanizzazione;Fine Urbanizzazione;Inizio Installazione ;Fine Installazione;Consegna al sindaco;Stato di avanzamento;X;Y
+;LAZIO;Accumoli;Accumoli Capoluogo (4sub);Accumoli Capoluogo (4sub);71;36;20;15;08/11/2016;13/02/2017;;14/04/2017;;13/08/2017;Consegna al sindaco ;13,244224;42,695459
+;LAZIO;Accumoli;Fonte del Campo;Fonte del Campo;26;15;5;6;21/11/2017;27/03/2017;;11/05/2017;;29/09/2017;Consegna al sindaco ;13,2576;42,694474
+;LAZIO;Accumoli;Grisciano;Grisciano;16;8;3;5;03/02/2017;22/03/2017;05/05/2017;08/05/2017;21/07/2017;01/08/2017;Consegna al sindaco ;13,268905;42,734069
+;LAZIO;Accumoli;Grisciano Palazzo;Grisciano Palazzo;26;13;8;5;03/02/2017;03/04/2017;;02/06/2017;;06/10/2017;Consegna al sindaco ;13,269998;42,737448
+;LAZIO;Accumoli;Grisciano Palazzo - ampliamento;Grisciano Palazzo - ampliamento;1;;;;15/11/2018;;;;;;Consegna area idonea ;13,270713;42,737442
+;LAZIO;Accumoli;Illica;Illica;7;3;3;1;21/11/2016;30/01/2017;13/03/2017;13/03/2017;30/04/2017;12/06/2017;Consegna al sindaco ;13,262832;42,704213
+;LAZIO;Accumoli;Libertino;Libertino;10;5;3;2;21/11/2016;27/02/2017;03/04/2017;03/04/2017;;03/07/2017;Consegna al sindaco ;13,253344;42,692165
+;LAZIO;Accumoli;Macchia;Macchia;12;7;5;0;23/11/2016;28/02/2017;08/04/2017;13/04/2017;29/05/2017;03/07/2017;Consegna al sindaco ;13,256404;42,669548
+;LAZIO;Accumoli;Poggio d'Api;Poggio d'Api;2;1;1;0;21/11/2016;14/02/2017;20/03/2017;20/03/2017;26/04/2017;12/06/2017;Consegna al sindaco ;13,29594;42,71967
+;LAZIO;Accumoli;Roccasalli;Roccasalli;13;7;2;4;20/02/2017;01/03/2017;05/04/2017;06/04/2017;10/07/2017;01/08/2017;Consegna al sindaco ;13,193864;42,6547
+;LAZIO;Accumoli;Roccasalli 2;Roccasalli 2;1;;1;;02/10/2017;;;;;20/02/2018;Consegna al sindaco ;13,192725;42,654832
+;LAZIO;Accumoli;Terracino;Terracino;11;5;4;2;23/11/2016;12/04/2017;;27/08/2017;27/10/2017;12/12/2017;Consegna al sindaco ;13,212657;42,680908
+;LAZIO;Accumoli;Tino;Tino;5;5;0;0;21/11/2016;28/02/2017;;28/03/2017;21/04/2017;12/06/2017;Consegna al sindaco ;13,25079;42,711733
+;MARCHE;Acquasanta Terme;Arli;Arli;6;6;;;18/04/2017;12/07/2017;;21/08/2017;20/10/2017;18/01/2018;Consegna al sindaco ;13,45227;42,800624
+;MARCHE;Amandola;San Cristoforo;San Cristoforo;2;2;;;08/05/2017;24/07/2017;;30/08/2017;14/10/2017;14/12/2017;Consegna al sindaco ;13,366619;43,017617
+;LAZIO;Amatrice;A. Anpas (Campo 1);A. Anpas (Campo 1);35;21;14;0;24/10/2016;24/11/2016;;03/01/2017;30/04/2017;29/05/2017;Consegna al sindaco ;13,299427;42,62432
+;LAZIO;Amatrice;A. Campo Sportivo (Campo 0);A. Campo Sportivo (Campo 0);25;19;5;1;14/10/2016;10/11/2016;;10/12/2016;24/01/2017;15/03/2017;Consegna al sindaco ;13,293377;42,624877
+;LAZIO;Amatrice;A. S. Cipriano 1 (Campo 2);A. S. Cipriano 1 (Campo 2);13;8;2;3;14/10/2016;18/07/2017;;04/09/2017;;30/11/2017;Consegna al sindaco ;13,302534;42,624861
+;LAZIO;Amatrice;A. S. Cipriano 2 (Campo 3 - Trentino);A. S. Cipriano 2 (Campo 3 - Trentino);27;14;13;0;14/10/2016;23/11/2017;23/04/2017;27/02/2017;20/03/2017;29/05/2017;Consegna al sindaco ;13,304158;42,624123
+;LAZIO;Amatrice;Bagnolo;Bagnolo;8;4;1;3;05/12/2016;27/02/2017;28/03/2017;23/03/2017;28/04/2017;01/08/2017;Consegna al sindaco ;13,234747;42,629255
+;LAZIO;Amatrice;Capricchia;Capricchia;9;7;1;1;13/02/2017;28/04/2017;;12/06/2017;11/08/2017;12/08/2017;Consegna al sindaco ;13,340287;42,623212
+;LAZIO;Amatrice;Casale;Casale;3;1;1;1;02/05/2017;10/07/2017;25/07/2017;26/07/2017;;19/09/2017;Consegna al sindaco ;13,286438;42,670664
+;LAZIO;Amatrice;Collecreta-Moletano;Collecreta-Moletano;17;7;6;4;05/12/2016;27/02/2017;09/04/2017;10/04/2017;05/05/2017;31/05/2017;Consegna al sindaco ;13,325752;42,630409
+;LAZIO;Amatrice;Collemagrone 1 (area 18);Collemagrone 1 (area 18);31;4;19;8;23/11/2016;13/02/2017;04/04/2017;10/04/2017;07/07/2017;01/08/2017;Consegna al sindaco ;13,284968;42,613176
+;LAZIO;Amatrice;Collemagrone 2 (area 18);Collemagrone 2 (area 18);79;27;42;10;11/11/2016;27/02/2017;;28/04/2017;;15/09/2017;Consegna al sindaco ;13,282736;42,614085
+;LAZIO;Amatrice;Collemagrone 3 (area 18);Collemagrone 3 (area 18);16;3;2;11;21/04/2017;10/07/2017;;03/10/2017;;13/02/2018;Consegna al sindaco ;13,283878;42,614651
+;LAZIO;Amatrice;Collemoresco;Collemoresco;6;5;1;;21/06/2017;07/08/2017;;06/09/2017;;30/11/2017;Consegna al sindaco ;13,234607;42,64664
+;LAZIO;Amatrice;Collepagliuca;Collepagliuca;7;6;1;0;22/02/2017;03/04/2017;15/05/2017;26/04/2017;13/05/2017;22/06/2017;Consegna al sindaco ;13,315383;42,634359
+;LAZIO;Amatrice;Configno;Configno;5;4;1;;13/02/2017;10/07/2017;;25/07/2017;25/08/2017;19/09/2017;Consegna al sindaco ;13,259748;42,615782
+;LAZIO;Amatrice;Cornillo Nuovo;Cornillo Nuovo;2;1;;1;21/06/2017;07/08/2017;;28/08/2017;;20/11/2017;Consegna al sindaco ;13,33523;42,6138
+;LAZIO;Amatrice;Cornillo Vecchio;Cornillo Vecchio;8;5;2;1;28/03/2017;15/05/2017;;12/06/2017;27/07/2017;14/09/2017;Consegna al sindaco ;13,285103;42,637391
+;LAZIO;Amatrice;Cossito;Cossito;3;1;2;;13/07/2017;;;15/11/2017;;05/04/2018;Consegna al sindaco ;13,292662;42,671877
+;LAZIO;Amatrice;Domo;Domo;6;5;1;;13/07/2017;08/09/2017;;;;15/01/2018;Consegna al sindaco ;13,237811;42,65703
+;LAZIO;Amatrice;Musicchio;Musicchio;7;5;2;;05/12/2016;21/02/2017;20/03/2017;20/03/2017;28/04/2017;12/06/2017;Consegna al sindaco ;13,279796;42,621533
+;LAZIO;Amatrice;Nommisci;Nommisci;5;4;1;;05/12/2016;13/02/2017;13/03/2017;27/02/2017;24/04/2017;05/06/2017;Consegna al sindaco ;13,278619;42,606078
+;LAZIO;Amatrice;Nommisci 2;Nommisci 2;3;;2;1;13/07/2017;13/09/2017;;12/10/2017;;28/02/2018;Consegna al sindaco ;13,278782;42,606713
+;LAZIO;Amatrice;Patarico;Patarico;5;2;2;1;13/03/2017;26/07/2017;;06/09/2017;;30/11/2017;Consegna al sindaco ;13,241101;42,648848
+;LAZIO;Amatrice;Pinaco Arafranca;Pinaco Arafranca;5;4;1;;13/07/2017;20/10/2017;;15/11/2017;;28/02/2018;Consegna al sindaco ;13,296658;42,606763
+;LAZIO;Amatrice;Poggio Vitellino;Poggio Vitellino;10;4;5;1;06/03/2017;15/05/2017;;12/06/2017;26/07/2017;10/08/2017;Consegna al sindaco ;13,266611;42,650628
+;LAZIO;Amatrice;Prato-Cascello;Prato-Cascello;6;3;1;2;06/03/2017;13/02/2017;15/03/2017;13/03/2017;24/04/2017;29/05/2017;Consegna al sindaco ;13,306759;42,635317
+;LAZIO;Amatrice;Preta;Preta;5;5;;;29/05/2017;24/07/2017;;12/10/2017;;06/02/2018;Consegna al sindaco ;13,344355;42,61675
+;LAZIO;Amatrice;Retrosi;Retrosi;12;8;3;1;05/12/2016;01/03/2017;10/04/2017;10/04/2017;06/06/2017;22/06/2017;Consegna al sindaco ;13,320725;42,625838
+;LAZIO;Amatrice;Rocchetta (area 12);Rocchetta (area 12);14;11;2;1;11/11/2016;13/01/2016;31/03/2017;23/03/2017;26/04/2017;12/06/2017;Consegna al sindaco ;13,289506;42,65623
+;LAZIO;Amatrice;S. Giusta;S. Giusta;17;8;6;3;15/05/2017;07/08/2017;;05/09/2017;30/10/2017;28/11/2017;Consegna al sindaco ;13,251017;42,64168
+;LAZIO;Amatrice;S. Tomasso 1;S. Tomasso 1;8;5;3;;05/12/2016;21/02/2017;20/03/2017;21/03/2017;24/04/2017;05/06/2017;Consegna al sindaco ;13,285476;42,677213
+;LAZIO;Amatrice;S. Tomasso 2;S. Tomasso 2;2;;;2;21/06/2017;07/08/2017;;05/09/2017;;04/12/2017;Consegna al sindaco ;13,285872;42,677259
+;LAZIO;Amatrice;S.Angelo;S.Angelo;22;11;6;5;14/10/2016;17/12/2016;10/04/2017;11/04/2017;09/06/2017;01/08/2017;Consegna al sindaco ;13,303881;42,650072
+;LAZIO;Amatrice;S.Lorenzo a Pinaco;S.Lorenzo a Pinaco;3;1;1;1;05/12/2016;13/02/2017;13/03/2017;13/03/2017;24/04/2017;05/06/2017;Consegna al sindaco ;13,296864;42,611913
+;LAZIO;Amatrice;Saletta;Saletta;7;3;4;0;23/11/2016;06/02/2017;18/03/2017;20/03/2017;21/04/2017;12/06/2017;Consegna al sindaco ;13,270112;42,672623
+;LAZIO;Amatrice;Scai;Scai;22;15;3;4;26/03/2017;15/05/2017;;31/05/2017;26/07/2017;08/08/2017;Consegna al sindaco ;13,229395;42,599939
+;LAZIO;Amatrice;Sommati;Sommati;31;19;11;1;22/02/2017;26/04/2017;29/05/2017;29/05/2017;26/07/2017;08/08/2017;Consegna al sindaco ;13,305002;42,642801
+;LAZIO;Amatrice;SS. Lorenzo e Flaviano;SS. Lorenzo e Flaviano;14;10;2;2;05/12/2016;06/03/2017;14/04/2017;26/04/2017;09/06/2017;22/06/2017;Consegna al sindaco ;13,288723;42,664769
+;LAZIO;Amatrice;SS. Lorenzo e Flaviano 2;SS. Lorenzo e Flaviano 2;3;3;;;27/09/2017;24/11/2017;;;;27/02/2018;Consegna al sindaco ;13,284484;42,663798
+;LAZIO;Amatrice;Torrita 0 (area 22);Torrita 0 (area 22);15;7;7;1;30/12/2016;28/02/2017;;03/04/2017;03/05/2017;12/06/2017;Consegna al sindaco ;13,220149;42,618923
+;LAZIO;Amatrice;Torrita 1;Torrita 1;5;2;3;;04/04/2017;12/06/2017;12/07/2017;12/07/2017;;23/08/2017;Consegna al sindaco ;13,221398;42,620118
+;LAZIO;Amatrice;Torrita 1 bis;Torrita 1 bis;7;4;3;;04/04/2017;12/06/2017;12/07/2017;11/09/2017;;25/11/2017;Consegna al sindaco ;13,221969;42,619944
+;LAZIO;Amatrice;Voceto;Voceto;4;2;0;2;02/05/2017;16/10/2017;;16/11/2017;;13/03/2018;Consegna al sindaco ;13,321526;42,634497
+;MARCHE;Arquata del Tronto;Borgo 2;Borgo 2;32;28;3;1;27/03/2017;08/06/2017;23/07/2017;24/07/2017;06/10/2017;28/11/2017;Consegna al sindaco ;13,295653;42,78087
+;MARCHE;Arquata del Tronto;Borgo 3;Borgo 3;10;;;;17/07/2018;;;;;;Consegna area idonea ;13,296202;42,780877
+;MARCHE;Arquata del Tronto;Borgo Arquata del Tronto;Borgo Arquata del Tronto;54;21;25;8;18/11/2016;28/02/2017;19/05/2017;19/05/2017;18/07/2017;22/09/2017;Consegna al sindaco ;13,298886;42,774504
+;MARCHE;Arquata del Tronto;Faete;Faete;14;7;5;2;27/12/2016;03/05/2017;23/07/2017;24/07/2017;02/10/2017;18/12/2017;Consegna al sindaco ;13,304664;42,769309
+;MARCHE;Arquata del Tronto;Pescara del Tronto1;Pescara del Tronto1;26;12;11;3;18/11/2016;18/01/2017;12/03/2017;13/03/2017;27/04/2017;17/06/2017;Consegna al sindaco ;13,269383;42,746464
+;MARCHE;Arquata del Tronto;Piedilama;Piedilama;16;12;3;1;27/12/2016;06/04/2017;;04/06/2017;20/07/2017;14/08/2017;Consegna al sindaco ;13,299417;42,78673
+;MARCHE;Arquata del Tronto;Pretare;Pretare;26;15;11;0;27/12/2016;03/04/2017;;04/06/2017;;13/09/2017;Consegna al sindaco ;13,301074;42,795774
+;MARCHE;Arquata del Tronto;Spelonga;Spelonga;33;17;14;1;27/12/2016;30/04/2017;;09/08/2017;26/10/2017;01/12/2017;Consegna al sindaco ;13,298383;42,758293
+;ABRUZZO;Basciano;Basciano (Villa Santa Maria);Basciano;3;1;2;;14/06/2017;28/09/2017;09/10/2017;18/10/2017;;29/12/2017;Consegna al sindaco ;13,741758;42,582116
+;ABRUZZO;Basciano;Madonna delle Grazie;Madonna delle Grazie;1;;1;;13/06/2017;28/09/2017;09/10/2017;18/10/2017;;29/12/2017;Consegna al sindaco ;13,728311;42,603225
+;MARCHE;Bolognola;Villa di Mezzo;Villa di Mezzo;7;4;2;1;10/04/2017;24/07/2017;;;;31/01/2018;Consegna al sindaco ;13,229318;42,993569
+;LAZIO;Borbona;Borbona Capoluogo;Borbona Capoluogo;18;6;11;1;21/04/2017;27/07/2017;16/10/2017;17/10/2017;;31/01/2018;Consegna al sindaco ;13,136993;42,510805
+;ABRUZZO;Cagnano Amiterno;San Cosimo;San Cosimo;12;1;8;3;28/05/2018;20/07/2018;14/08/2018;27/08/2018;26/10/2018;21/11/2018;Consegna al sindaco ;13,232636;42,458498
+;MARCHE;Caldarola;Campo Sportivo;Campo Sportivo;104;45;39;20;18/04/2017;26/06/2017;;18/09/2017;;10/05/2018;Consegna al sindaco ;13,217558;43,14387
+;MARCHE;Caldarola;Monastero;Monastero;3;;1;2;09/06/2017;18/09/2017;;05/10/2017;;22/02/2018;Consegna al sindaco ;13,22343;43,136375
+;MARCHE;Camerino;Arcofiato;Arcofiato;;;;;24/08/2017;17/05/2018;06/07/2018;07/07/2018;20/08/2018;;Fine Installazione;13,093196;43,132222
+;MARCHE;Camerino;Loc. Le Cortine;Loc. Le Cortine;132;74;46;12;27/04/2017;31/07/2017;;05/10/2017;;13/08/2018;Consegna al sindaco ;13,059077;43,149787
+;MARCHE;Camerino;Loc. Le Cortine - Ampliamento;Loc. Le Cortine - Ampliamento;45;24;6;15;20/11/2017;16/04/2018;17/06/2018;09/07/2018;02/08/2018;;Fine Installazione;13,061984;43,150973
+;MARCHE;Camerino;Loc. Vallicelle A;Loc. Vallicelle A;40;13;19;8;05/06/2017;08/08/2017;;30/10/2017;;24/08/2018;Consegna al sindaco ;13,069312;43,129559
+;MARCHE;Camerino;Mergniano San Savino;Mergniano San Savino;6;2;3;1;30/09/2017;15/01/2018;06/05/2018;07/05/2018;24/06/2018;28/07/2018;Consegna al sindaco ;13,050497;43,163704
+;MARCHE;Camerino;Morro;Morro;7;;5;2;12/07/2017;18/09/2017;22/10/2017;23/10/2017;;24/03/2018;Consegna al sindaco ;13,025868;43,112381
+;MARCHE;Camerino;Piegusciano;Piegusciano;9;3;4;2;20/07/2017;18/09/2017;15/05/2018;16/05/2018;02/07/2018;07/08/2018;Consegna al sindaco ;13,084998;43,160301
+;MARCHE;Camerino;Rocca Varano;Rocca Varano;10;4;;6;13/09/2017;15/01/2018;01/07/2018;02/07/2018;19/08/2018;29/09/2018;Consegna al sindaco ;13,119467;43,113444
+;MARCHE;Camerino;S. Erasmo;S. Erasmo;16;11;3;2;07/08/2017;06/11/2017;03/06/2018;04/06/2018;;27/08/2018;Consegna al sindaco ;13,016524;43,125
+;MARCHE;Camerino;San Paolo - Via Ottaviani;San Paolo - Via Ottaviano;30;15;12;3;05/07/2017;18/09/2017;25/04/2018;26/04/2018;20/06/2018;08/08/2018;Consegna al sindaco ;13,06412;43,146934
+;MARCHE;Camerino;San Paolo - Via Ottaviani - Ampliamento;San Paolo - Via Ottaviani - Ampliamento;13;;;;20/11/2017;05/02/2018;14/03/2018;15/03/2018;16/05/2018;08/08/2018;Consegna al sindaco ;13,064691;43,146406
+;ABRUZZO;Campli;Piancarani di Campli;Piancarani di Campli;9;;;;01/09/2017;16/11/2017;;10/01/2018;;27/03/2018;Consegna al sindaco ;13,727939;42,731399
+;MARCHE;Camporotondo di Fiastrone;Belloni;Belloni;7;4;3;;10/04/2017;06/07/2017;;17/09/2017;;17/01/2018;Consegna al sindaco ;13,267587;43,130459
+;ABRUZZO;Campotosto;Capoluogo Poggio Cancelli;Capoluogo Poggio Cancelli;4;;;;04/05/2018;;;;;;Consegna area idonea ;13,32808;42,558428
+;ABRUZZO;Campotosto;Capoluogo Trasanna;Capoluogo Trasanna;9;;;;04/05/2018;;;;;;Consegna area idonea ;13,367918;42,563111
+;ABRUZZO;Campotosto;Colle Vicciarello;Colle Vicciarello;10;;;;04/05/2018;20/09/2018;17/11/2018;19/11/2018;24-apr-19;18/07/2019;Consegna al sindaco ;13,366788;42,561761
+;ABRUZZO;Campotosto;Mascioni;Mascioni;4;;;;04/05/2018;20/09/2018;21/10/2018;23/10/2018;30-dic-18;08/07/2019;Consegna al sindaco ;13,34849;42,52812
+;ABRUZZO;Capitignano;Capitignano III;Capitignano III;12;0;10;2;15/05/2017;21/08/2017;;06/09/2017;;24/01/2018;Consegna al sindaco ;13,301345;42,522123
+;ABRUZZO;Capitignano;Stazione (Capitignano I);Stazione (Capitignano I);6;0;4;2;15/05/2017;21/08/2017;;17/09/2017;;31/01/2018;Consegna al sindaco ;13,301438;42,516306
+;UMBRIA;Cascia;Avendita;Avendita;12;6;4;2;06/03/2017;26/05/2017;;07/07/2017;17/08/2017;24/08/2017;Consegna al sindaco ;13,04863;42,755173
+;UMBRIA;Cascia;Capoluogo (Padule) - Lotto 1;Capoluogo (Padule) - Lotto 1;26;13;10;3;09/03/2017;21/07/2017;;10/10/2017;;19/03/2018;Consegna al sindaco ;13,027;42,717
+;UMBRIA;Cascia;Capoluogo (Padule) - Lotto 2;Capoluogo (Padule) - Lotto 2;67;27;34;6;09/03/2017;21/07/2017;;03/10/2017;;12/04/2018;Consegna al sindaco ;13,025016;42,719129
+;UMBRIA;Cascia;Capoluogo (Padule) - Lotto 3;Capoluogo (Padule) - Lotto 3;5;4;1;;31/07/2017;27/11/2017;;28/12/2017;;14/03/2018;Consegna al sindaco ;13,025327;42,720617
+;UMBRIA;Cascia;Cerasola;Cerasola;2;1;1;;31/07/2017;27/11/2017;;28/12/2017;;21/04/2018;Consegna al sindaco ;12,995452;42,77193
+;UMBRIA;Cascia;Col Forcella;Col Forcella;1;1;;;31/07/2017;27/11/2017;;28/12/2017;;19/03/2018;Consegna al sindaco ;13,026955;42,737171
+;UMBRIA;Cascia;Colle Avendita;Colle Avendita;7;2;4;1;06/03/2017;12/06/2017;;10/07/2017;;07/09/2017;Consegna al sindaco ;13,04601;42,758148
+;UMBRIA;Cascia;Maltigliano;Maltigliano;6;2;3;1;06/03/2017;14/07/2017;;21/08/2017;20/10/2017;24/11/2017;Consegna al sindaco ;13,053372;42,709602
+;UMBRIA;Cascia;Manigi;Manigi;1;1;;;11/04/2017;14/07/2017;03/08/2017;04/08/2017;;11/10/2017;Consegna al sindaco ;13,084833;42,713259
+;UMBRIA;Cascia;SAE Isolate (San Giorgio);SAE Isolate (San Giorgio);4;1;2;1;11/04/2017;14/07/2017;03/08/2017;04/08/2017;02/10/2017;26/10/2017;Consegna al sindaco ;13,015982;42,750961
+;UMBRIA;Cascia;Santa Trinita;Santa Trinita;1;;1;;31/07/2017;27/11/2017;;28/12/2017;;21/04/2018;Consegna al sindaco ;13,074139;42,699166
+;UMBRIA;Cascia;Tazzo;Tazzo;1;;1;;05/05/2017;14/07/2017;;29/08/2017;;24/11/2017;Consegna al sindaco ;13,054302;42,720657
+;MARCHE;Castelraimondo;Castelraimondo (Campo Sportivo);Castelraimondo (Campo Sportivo);9;3;3;3;07/06/2017;08/08/2017;;10/10/2017;;21/04/2018;Consegna al sindaco ;13,055193;43,201502
+;MARCHE;Castelsantangelo sul Nera;Gualdo;Gualdo;11;7;3;1;17/02/2017;22/05/2017;09/07/2017;10/07/2017;;24/09/2017;Consegna al sindaco ;13,154035;42,888529
+;MARCHE;Castelsantangelo sul Nera;Nocria;Nocria;12;7;4;1;07/04/2017;26/07/2017;;18/09/2017;;30/12/2017;Consegna al sindaco ;13,165409;42,886649
+;MARCHE;Castelsantangelo sul Nera;Nuova area P.le Piccinini;Nuova area P.le Piccinini;40;27;13;;07/06/2017;07/08/2017;;16/10/2017;18/03/2018;24/03/2018;Consegna al sindaco ;13,151099;42,898742
+;MARCHE;Cessapalombo;Campo Sportivo Centro 1;Campo Sportivo Centro 1;7;3;2;2;10/04/2017;10/07/2017;22/07/2017;04/08/2017;03/10/2017;25/11/2017;Consegna al sindaco ;13,255005;43,106709
+;LAZIO;Cittareale;Cittareale Capoluogo;Cittareale Capoluogo;2;1;1;;29/09/2017;20/11/2017;;10/01/2018;09/03/2018;04/04/2018;Consegna al sindaco ;13,159335;42,62118
+;LAZIO;Cittareale;Collicelle;Collicelle;6;2;2;2;29/09/2017;20/11/2017;;;;24/04/2018;Consegna al sindaco ;13,169314;42,592599
+;LAZIO;Cittareale;Conca;Conca;4;3;1;;29/09/2017;18/04/2018;02/07/2018;03/07/2018;07/08/2018;05/09/2018;Consegna al sindaco ;13,156123;42,598018
+;LAZIO;Cittareale;Loc. Cupello;Loc. Cupello;6;3;2;1;29/09/2017;20/11/2017;;;15/04/2018;25/05/2018;Consegna al sindaco ;13,155919;42,62033
+;LAZIO;Cittareale;Molo Coletta;Molo Coletta;3;2;1;;29/09/2017;04/12/2017;22/01/2018;23/01/2018;15/04/2018;25/05/2018;Consegna al sindaco ;13,152801;42,577197
+;LAZIO;Cittareale;Pallottini;Pallottini;3;1;1;1;29/09/2017;04/12/2017;22/01/2018;23/01/2018;15/04/2018;24/04/2018;Consegna al sindaco ;13,163625;42,591248
+;LAZIO;Cittareale;Santa Croce;Santa Croce;6;2;3;1;29/09/2017;09/04/2018;;21/06/2018;07/08/2018;21/08/2018;Consegna al sindaco ;13,148697;42,562791
+;ABRUZZO;Colledara;Capoluogo;Capoluogo;11;4;4;3;23/03/2017;24/08/2017;;04/01/2018;;21/03/2018;Consegna al sindaco ;13,680401;42,541803
+;ABRUZZO;Colledara;Ornano;Ornano;10;3;4;3;23/03/2017;24/08/2017;;25/10/2017;25/12/2017;08/02/2018;Consegna al sindaco ;13,654043;42,536198
+;ABRUZZO;Cortino;Capoluogo;Capoluogo;5;;5;;18/05/2017;21/08/2017;26/09/2017;27/09/2017;;27/12/2017;Consegna al sindaco ;13,504304;42,620111
+;ABRUZZO;Cortino;Casanova;Casanova;5;;5;;18/05/2017;21/08/2017;26/09/2017;27/09/2017;;27/12/2017;Consegna al sindaco ;13,573727;42,629731
+;ABRUZZO;Cortino;Collegilesco;Collegilesco;2;;1;1;18/05/2017;21/08/2017;30/09/2017;07/10/2017;;27/12/2017;Consegna al sindaco ;13,557736;42,634941
+;ABRUZZO;Cortino;Pagliaroli;Pagliaroli;7;3;4;;18/05/2017;21/08/2017;26/09/2017;27/09/2017;;27/12/2017;Consegna al sindaco ;13,538925;42,632296
+;ABRUZZO;Cortino;Vernesca;Vernesca;1;;1;;18/05/2017;21/08/2017;26/09/2017;27/09/2017;;27/12/2017;Consegna al sindaco ;13,490825;42,645782
+;ABRUZZO;Crognaleto;Cesacastina;Cesacastina;3;;2;1;20/07/2017;28/09/2017;;10/11/2017;19/12/2017;31/07/2018;Consegna al sindaco ;13,447343;42,589343
+;ABRUZZO;Crognaleto;Frattoli;Frattoli;3;;2;1;20/07/2017;05/04/2018;27/06/2018;09/07/2018;22/10/2018;21/02/2019;Consegna al sindaco ;13,4652;42,576087
+;ABRUZZO;Crognaleto;Nerito;Nerito;2;;2;;20/07/2017;28/09/2017;;;;29/12/2017;Consegna al sindaco ;13,479055;42,549167
+;ABRUZZO;Crognaleto;San Giorgio;San Giorgio;3;;2;1;20/07/2017;28/09/2017;;27/10/2017;26/12/2017;31/07/2018;Consegna al sindaco ;13,529731;42,596012
+;ABRUZZO;Crognaleto;Tottea;Tottea;2;;2;;20/07/2017;28/09/2017;;20/11/2017;15/02/2018;31/07/2018;Consegna al sindaco ;13,461958;42,552624
+;MARCHE;Fiastra;Acquacanina/Cerreto;Acquacanina/Cerreto;22;10;8;4;12/04/2017;05/06/2017;23/07/2017;31/07/2017;;05/01/2018;Consegna al sindaco ;13,171195;43,033745
+;MARCHE;Fiastra;Capoluogo;Capoluogo;28;21;6;1;12/04/2017;12/06/2017;;11/08/2017;;15/12/2017;Consegna al sindaco ;13,157224;43,034234
+;MARCHE;Fiastra;Fiegni;Fiegni;14;12;2;0;12/04/2017;22/05/2017;02/07/2017;03/07/2017;24/09/2017;06/10/2017;Consegna al sindaco ;13,160716;43,058707
+;MARCHE;Fiastra;Polverina;Polverina;10;10;0;0;12/04/2017;22/05/2017;11/06/2017;19/06/2017;;23/08/2017;Consegna al sindaco ;13,120166;43,090108
+;MARCHE;Force;Fontevecchia;Fontevecchia;7;4;2;1;08/05/2017;13/07/2017;;27/09/2017;;20/01/2018;Consegna al sindaco ;13,48855;42,964754
+;MARCHE;Gagliole;Selvalagli;Selvalagli;4;4;;;10/04/2017;09/08/2017;;07/09/2017;;20/01/2018;Consegna al sindaco ;13,065542;43,219236
+;MARCHE;Gualdo;Località Valle;Località Valle;9;6;1;2;10/04/2017;05/07/2017;;03/08/2017;06/10/2017;07/12/2017;Consegna al sindaco ;13,346856;43,067843
+;LAZIO;Leonessa;Leonessa capoluogo;Leonessa capoluogo;16;7;8;1;07/08/2017;12/10/2017;;10/01/2018;09/03/2018;25/04/2018;Consegna al sindaco ;12,958413;42,568281
+;LAZIO;Leonessa;Terzone;Terzone;5;5;;;07/08/2017;12/10/2017;;30/11/2017;;20/02/2018;Consegna al sindaco ;13,071944;42,612411
+;MARCHE;Montecavallo;Monte Cavallo Capoluogo Loc. Piè del Sasso;Monte Cavallo Capoluogo Loc. Piè del Sasso;10;6;1;3;10/04/2017;05/07/2017;;;;23/08/2017;Consegna al sindaco ;13,001847;42,994186
+;MARCHE;Montegallo;Balzo;Balzo;29;24;5;;18/04/2017;14/07/2017;;06/09/2017;;22/04/2018;Consegna al sindaco ;13,327709;42,841553
+;MARCHE;Montegallo;Uscerno;Uscerno;5;2;3;;18/04/2017;11/07/2017;;06/09/2017;;29/12/2017;Consegna al sindaco ;13,380666;42,860549
+;ABRUZZO;Montereale;Capoluogo;Capoluogo;14;;11;3;28/08/2017;30/10/2017;;01/12/2017;05/04/2018;31/07/2018;Consegna al sindaco ;13,237237;42,528036
+;ABRUZZO;Montereale;S. Giovanni di Paganica;S. Giovanni di Paganica;5;;4;1;28/08/2017;30/10/2017;21/11/2017;24/11/2017;;26/04/2018;Consegna al sindaco ;13,278021;42,503685
+;ABRUZZO ;Montorio al Vomano;Montorio 1;Montorio 1;44;7;28;9;08/06/2017;10/10/2017;02/11/2017;07/11/2017;;05/03/2018;Consegna al sindaco ;13,644255;42,580296
+;ABRUZZO;Montorio al Vomano;Villa Maggiore;Villa Maggiore;10;5;2;3;08/06/2017;20/11/2017;;06/12/2017;;04/04/2018;Consegna al sindaco ;13,644255;42,589887
+;MARCHE;Muccia;Contrada Varano;Contrada Varano;47;14;24;9;03/05/2017;05/07/2017;;02/10/2017;;24/03/2018;Consegna al sindaco ;13,053207;43,079099
+;MARCHE;Muccia;Costafiore;Costafiore;7;2;3;2;10/04/2017;10/07/2017;;28/08/2017;20/10/2017;26/10/2017;Consegna al sindaco ;13,03877;43,06882
+;MARCHE;Muccia;Massaprofoglio;Massaprofoglio;14;12;2;0;10/04/2017;13/07/2017;03/08/2017;04/09/2017;;07/12/2017;Consegna al sindaco ;13,004826;43,060646
+;MARCHE;Muccia;Pian di Giove A;Pian di Giove A;42;13;18;11;07/06/2017;05/07/2017;;20/09/2017;;10/02/2018;Consegna al sindaco ;13,044846;43,080111
+;MARCHE;Muccia;Pian di Giove B;Pian di Giove B;54;36;13;5;07/06/2017;05/07/2017;;09/08/2017;03/10/2017;22/12/2017;Consegna al sindaco ;13,04767;43,079332
+;UMBRIA;Norcia;Agriano;Agriano;4;3;1;;19/04/2017;13/07/2017;10/08/2017;11/08/2017;;05/11/2017;Consegna al sindaco ;13,027397;42,765085
+;UMBRIA;Norcia;Ancarano;Ancarano;25;5;15;5;30/03/2017;10/07/2017;;01/08/2017;21/10/2017;05/11/2017;Consegna al sindaco ;13,105076;42,837134
+;UMBRIA;Norcia;Casale di Serravalle;Casale di Serravalle;5;4;;1;19/07/2017;28/09/2017;;;;28/02/2018;Consegna al sindaco ;13,060902;42,791823
+;UMBRIA;Norcia;Catelluccio di Norcia;Catelluccio di Norcia;8;2;6;;22/05/2018;15/10/2018;22/11/2018;02/04/2019;28/06/2019;09/07/2019;Consegna al sindaco ;13,206744;42,828198
+;UMBRIA;Norcia;Forsivo;Forsivo;2;1;;1;19/04/2017;13/07/2017;;08/09/2017;11/11/2017;15/12/2017;Consegna al sindaco ;13,014165;42,799722
+;UMBRIA;Norcia;Frascaro;Frascaro;15;9;5;1;19/04/2017;21/07/2017;;02/09/2017;;15/12/2017;Consegna al sindaco ;13,143627;42,748345
+;UMBRIA;Norcia;Loc. Campi;Loc. Campi;20;12;7;1;30/03/2017;10/07/2017;02/08/2017;03/08/2017;16/09/2017;05/11/2017;Consegna al sindaco ;13,0942;42,8503
+;UMBRIA;Norcia;Madonna delle Grazie 1;Madonna delle Grazie 1;28;6;21;1;31/07/2017;02/10/2017;;06/11/2017;;28/02/2018;Consegna al sindaco ;13,104355;42,789506
+;UMBRIA;Norcia;Madonna delle Grazie 2;Madonna delle Grazie 2;26;9;13;4;31/07/2017;02/10/2017;;16/11/2017;;24/04/2018;Consegna al sindaco ;13,104632;42,79064
+;UMBRIA;Norcia;Madonna delle Grazie 3;Madonna delle Grazie 3;8;;;;29/06/2018;25/03/2019;06/05/2019;07/05/2019;06/07/2019;09/07/2019;Consegna al sindaco ;13,10588;42,790027
+;UMBRIA;Norcia;N. Montedoro;N. Montedoro;49;25;21;3;30/03/2017;13/07/2017;03/08/2017;04/08/2017;20/10/2017;08/12/2017;Consegna al sindaco ;13,086771;42,798535
+;UMBRIA;Norcia;N. XX SETTEBRE 3;N. XX SETTEBRE 3;4;;;4;09/11/2017;19/02/2018;05/04/2018;24/04/2018;22/06/2018;31/07/2018;Consegna al sindaco ;13,096552;42,799328
+;UMBRIA;Norcia;N. XX Settembre;N. XX Settembre;53;30;20;3;03/10/2016;28/11/2016;05/03/2017;08/12/2016;05/03/2017;05/03/2017;Consegna al sindaco ;13,095772;42,797497
+;UMBRIA;Norcia;N. XX Settembre 2 (Cupa);N. XX Settembre 2 (Cupa);44;24;13;7;19/04/2017;13/07/2017;06/08/2017;07/08/2017;;08/12/2017;Consegna al sindaco ;13,096489;42,798681
+;UMBRIA;Norcia;"N. Zona Industriale ""A""";"N. Zona Industriale ""A""";63;33;21;9;22/11/2016;27/01/2017;06/04/2017;25/02/2017;18/04/2017;09/05/2017;Consegna al sindaco ;13,094;42,786
+;UMBRIA;Norcia;"N. Zona Industriale ""B""";"N. Zona Industriale ""B""";90;50;30;10;20/12/2016;18/04/2017;;11/05/2017;;27/09/2017;Consegna al sindaco ;13,092;42,79
+;UMBRIA;Norcia;"N. Zona Industriale ""C"" - Misciano";"N. Zona Industriale ""C"" - Misciano";95;35;56;4;15/06/2017;28/08/2017;;27/09/2017;;28/02/2018;Consegna al sindaco ;13,095339;42,777482
+;UMBRIA;Norcia;"N. Zona industriale ""D""";"N. Zona industriale ""D""";8;;;;09/07/2018;25/03/2019;30/04/2019;02/05/2019;26/06/2019;09/07/2019;Consegna al sindaco ;13,095112;42,781225
+;UMBRIA;Norcia;Nottoria;Nottoria;9;4;4;1;19/04/2017;09/08/2017;;19/09/2017;;15/12/2017;Consegna al sindaco ;13,155918;42,729921
+;UMBRIA;Norcia;Piediripa;Piediripa;3;2;1;;19/07/2017;28/09/2017;;06/11/2017;;23/12/2017;Consegna al sindaco ;13,112281;42,740495
+;UMBRIA;Norcia;Popoli;Popoli;2;;2;;03/06/2017;28/09/2017;;06/11/2017;;23/12/2017;Consegna al sindaco ;13,105384;42,752637
+;UMBRIA;Norcia;San Pellegrino;San Pellegrino;18;11;7;0;03/10/2016;01/12/2016;16/02/2017;08/12/2016;16/02/2017;18/02/2017;Consegna al sindaco ;13,146716;42,756153
+;UMBRIA;Norcia;San Pellegrino 2;San Pellegrino 2;16;5;7;4;19/04/2017;07/08/2017;02/09/2017;05/09/2017;31/10/2017;12/11/2017;Consegna al sindaco ;13,147084;42,755485
+;UMBRIA;Norcia;San Pellegrino 3;San Pellegrino 3;21;16;4;1;19/07/2017;26/09/2017;25/10/2017;20/11/2017;08/01/2018;03/02/2018;Consegna al sindaco ;13,147248;42,755092
+;UMBRIA;Norcia;Savelli;Savelli;12;6;1;5;03/06/2017;09/08/2017;;19/09/2017;;23/12/2017;Consegna al sindaco ;13,124981;42,72721
+;UMBRIA;Norcia;Valcaldara;Valcaldara;11;6;5;;19/07/2017;28/09/2017;26/10/2017;06/11/2017;16/12/2017;03/02/2018;Consegna al sindaco ;13,125947;42,740805
+;MARCHE;Petriolo;Via Madre Teresa di Calcutta;Via Madre Teresa di Calcutta;10;2;3;5;10/11/2017;10/02/2018;29/07/2018;31/07/2018;24/09/2018;11/01/2019;Consegna al sindaco ;13,461792;43,224763
+;MARCHE;Pieve Torina;Antico;Antico;8;5;1;2;07/03/2017;12/06/2017;;31/07/2017;;07/12/2017;Consegna al sindaco ;13,058762;43,040419
+;MARCHE;Pieve Torina;Appennino;Appennino;14;11;2;1;07/03/2017;05/06/2017;16/07/2017;17/07/2017;26/09/2017;11/11/2017;Consegna al sindaco ;13,080563;42,975261
+;MARCHE;Pieve Torina;Casavecchia;Casavecchia;17;10;7;0;07/03/2017;05/06/2017;;10/07/2017;17/09/2017;11/11/2017;Consegna al sindaco ;13,065115;42,997891
+;MARCHE;Pieve Torina;La Serra;La Serra;44;12;24;8;07/03/2017;13/06/2017;;04/09/2017;;07/12/2017;Consegna al sindaco ;13,048635;43,03776
+;MARCHE;Pieve Torina;Lottizzazione Rosi - Le Piane;Lottizzazione Rosi - Le Piane;106;62;33;11;07/03/2017;22/05/2017;;26/06/2017;;18/01/2018;Consegna al sindaco ;13,04525;43,037082
+;MARCHE;Pioraco;Ristorante Laila;Ristorante Laila;34;14;18;2;19/05/2017;03/08/2017;;13/09/2017;;03/03/2018;Consegna al sindaco ;12,973483;43,181296
+;LAZIO;Posta;Posta I;Posta I;9;5;4;;06/09/2017;14/11/2017;;31/01/2018;30/03/2018;19/06/2018;Consegna al sindaco ;13,099482;42,529557
+;LAZIO;Posta;Steccato I;Steccato I;10;8;1;1;06/09/2017;24/11/2017;21/01/2018;22/01/2018;30/03/2018;19/06/2018;Consegna al sindaco ;13,128795;42,546818
+;UMBRIA;Preci;Capoluogo;Capoluogo;14;8;5;1;06/03/2017;06/06/2017;;31/08/2017;24/10/2017;23/12/2017;Consegna al sindaco ;13,041534;42,8799
+;UMBRIA;Preci;Capoluogo II - Faito area 1;Capoluogo II - Faito area 1;2;;1;1;09/11/2017;19/02/2018;19/03/2018;20/03/2018;16/05/2018;08/06/2018;Consegna al sindaco ;13,039091;42,876654
+;UMBRIA;Preci;Capoluogo II - Faito area 2;Capoluogo II - Faito area 2;4;1;3;;09/11/2017;19/02/2018;31/03/2018;03/04/2018;25/05/2018;08/06/2018;Consegna al sindaco ;13,038305;42,877177
+;UMBRIA;Preci;Castelvecchio;Castelvecchio;5;2;2;1;06/03/2017;06/06/2017;;19/07/2017;16/09/2017;06/12/2017;Consegna al sindaco ;13,01836;42,890194
+;UMBRIA;Preci;Corone;Corone;6;2;4;;06/03/2017;06/06/2017;03/08/2017;04/08/2017;03/10/2017;06/12/2017;Consegna al sindaco ;13,012061;42,883525
+;UMBRIA;Preci;Piedivalle;Piedivalle;6;4;2;;06/03/2017;06/06/2017;;19/07/2017;16/09/2017;06/12/2017;Consegna al sindaco ;13,063285;42,868727
+;ABRUZZO;Rocca Santa Maria;Cona Faiete;Cona Faiete;2;;2;;24/05/2017;21/08/2017;01/09/2017;26/09/2017;;21/12/2017;Consegna al sindaco ;13,554295;42,668059
+;ABRUZZO;Rocca Santa Maria;Paranesi Ciarelli;Paranesi Ciarelli;1;;1;;24/05/2017;21/08/2017;01/09/2017;26/09/2017;;21/12/2017;Consegna al sindaco ;13,502456;42,691355
+;ABRUZZO;Rocca Santa Maria;Villa Maggiore;Villa Maggiore;2;;2;;24/05/2017;21/08/2017;01/09/2017;26/09/2017;;21/12/2017;Consegna al sindaco ;13,50624;42,676777
+;MARCHE;San Ginesio;Campo Sportivo (via del Tramonto);Campo Sportivo (via del Tramonto);12;7;3;2;11/05/2017;13/07/2017;;28/08/2017;;09/12/2017;Consegna al sindaco ;13,313786;43,109926
+;MARCHE;San Ginesio;Pian di Pieca;Pian di Pieca;19;10;4;5;15/05/2017;13/07/2017;;04/09/2017;;23/12/2017;Consegna al sindaco ;13,280042;43,078065
+;MARCHE;San Ginesio;Santa Maria d'Alto Cielo;Santa Maria d'Alto Cielo;7;4;1;2;11/05/2017;13/07/2017;;30/08/2017;;23/12/2017;Consegna al sindaco ;13,304591;43,145557
+;MARCHE;San Severino;Rione San Michele (Lotto 1);Rione San Michele (Lotto 1);29;14;15;0;18/04/2017;19/06/2017;;04/09/2017;;20/12/2017;Consegna al sindaco ;13,196482;43,229363
+;MARCHE;San Severino;Rione San Michele (Lotto 2);Rione San Michele (Lotto 2);39;22;15;2;18/04/2017;19/06/2017;;04/09/2017;;20/12/2017;Consegna al sindaco ;13,194607;43,229215
+;MARCHE;San Severino;Rione San Michele (Lotto 3);Rione San Michele (Lotto 3);35;22;13;0;18/04/2017;19/06/2017;;04/09/2017;;10/01/2018;Consegna al sindaco ;13,194845;43,228857
+;MARCHE;Sarnano;Morelli;Morelli;12;8;4;;13/05/2017;10/07/2017;;28/08/2017;;16/02/2018;Consegna al sindaco ;13,303103;43,027512
+;MARCHE;Sarnano;San Cassiano;San Cassiano;9;5;3;1;11/05/2017;12/07/2017;;04/09/2017;;30/12/2017;Consegna al sindaco ;13,268563;43,05527
+;MARCHE;Serrapetrona;Ampliamento;Ampliamento;2;1;1;;18/04/2017;16/04/2018;20/05/2018;21/05/2018;26/06/2018;10/08/2018;Consegna al sindaco ;13,211906;43,148905
+;MARCHE;Serrapetrona;Loc. Caccamo;Loc. Caccamo;16;10;2;4;18/04/2017;26/06/2017;22/07/2017;07/08/2017;;23/12/2017;Consegna al sindaco ;13,211059;43,148354
+;ABRUZZO;Torricella Sicura;Calcara di Torricella;Calcara di Torricella;1;;1;;01/03/2017;;;;;22/07/2017;Consegna al sindaco ;13,586;42,64
+;ABRUZZO;Torricella Sicura;Capoluogo;Capoluogo;48;8;28;12;01/03/2017;24/07/2017;;21/08/2017;;21/12/2017;Consegna al sindaco ;13,664;42,656
+;ABRUZZO;Tossicia;Azzinano;Azzinano;11;;11;;04/04/2017;24/07/2017;;21/08/2017;;21/12/2017;Consegna al sindaco ;13,632532;42,55714
+;ABRUZZO;Tossicia;Castelmaidetto;Castelmaidetto;14;;14;;04/04/2017;24/07/2017;;21/08/2017;;02/12/2017;Consegna al sindaco ;13,659664;42,552644
+;ABRUZZO;Tossicia;Tossicia capoluogo;Tossicia capoluogo;11;;11;;04/04/2017;24/07/2017;;21/08/2017;;18/11/2017;Consegna al sindaco ;13,646277;42,544026
+;MARCHE;Treia;Villa Lazzarini;Villa Lazzarini;8;2;3;3;22/05/2017;07/08/2017;;18/09/2017;;20/01/2018;Consegna al sindaco ;13,327431;43,285291
+;MARCHE;Ussita;Loc. Vallazza;Loc. Vallazza;20;12;5;3;17/05/2017;11/07/2017;;09/10/2017;;26/02/2018;Consegna al sindaco ;13,14297;42,944699
+;MARCHE;Ussita;Ussita La Pieve - Capoluogo ;Ussita La Pieve - Capoluogo;69;39;21;9;27/02/2017;21/06/2017;;26/07/2017;;30/03/2018;Consegna al sindaco ;13,135142;42,943737
+;MARCHE;Valfornace;Giovanni XXIII;Giovanni XXIII;41;23;13;5;03/05/2017;10/07/2017;;12/10/2017;;29/03/2018;Consegna al sindaco ;13,089403;43,060802
+;MARCHE;Valfornace;Piani Campi (Fiordimonte);Piani Campi (Fiordimonte);38;23;15;;13/04/2017;10/07/2017;;;;21/04/2018;Consegna al sindaco ;13,094065;43,030817
+;MARCHE;Valfornace;Piazza Vittorio Veneto (Pievebovigliana);Piazza Vittorio Veneto (Pievebovigliana);50;26;18;6;03/05/2017;10/07/2017;30/10/2017;31/10/2017;05/02/2018;05/07/2018;Consegna al sindaco ;13,086972;43,059852
+;MARCHE;Valfornace;Piazza Vittorio Veneto (Pievebovigliana) B;Piazza Vittorio Veneto (Pievebovigliana) B;23;6;14;3;03/05/2017;10/07/2017;;;;12/02/2018;Consegna al sindaco ;13,08802;43,058917
+;ABRUZZO;Valle Castellana;Capoluogo;Capoluogo;6;2;2;2;10/01/2018;18/06/2018;28/06/2018;09/07/2018;;;Inizio Installazione;13,497199;42,736617
+;ABRUZZO;Valle Castellana;Ceraso;Ceraso;3;;2;1;10/01/2018;18/06/2018;07/09/2018;10/09/2018;08/11/2018;07/12/2018;Consegna al sindaco ;13,494516;42,704596
+;ABRUZZO;Valle Castellana;Macchia da Sole;Macchia da Sole;6;2;2;2;10/01/2018;18/06/2018;09/11/2018;21/11/2018;27/03/2019;;Fine Installazione;13,577391;42,744011
+;ABRUZZO;Valle Castellana;Pascellata;Pascellata;4;1;3;;10/01/2018;11/06/2018;05/07/2018;14/07/2018;;07/12/2018;Consegna al sindaco ;13,496595;42,700811
+;ABRUZZO;Valle Castellana;Pietralta;Pietralta;15;2;11;2;10/01/2018;18/06/2018;17/08/2018;27/09/2018;03/12/2018;;Fine Installazione;13,449128;42,703778
+;ABRUZZO;Valle Castellana;Villa Franca;Villa Franca;2;1;1;;10/01/2018;11/06/2018;28/06/2018;02/07/2018;03/09/2018;20/09/2018;Consegna al sindaco ;13,542216;42,813289
+;MARCHE;Visso;Borgo San Giovanni 1;Borgo San Giovanni 1;12;8;2;2;12/04/2017;12/06/2017;;16/10/2017;;29/12/2017;Consegna al sindaco ;13,087028;42,926976
+;MARCHE;Visso;Campo Sportivo ;Campo Sportivo ;42;18;12;12;05/05/2017;03/07/2017;;16/10/2017;;30/12/2018;Consegna al sindaco ;13,085068;42,927566
+;MARCHE;Visso;Croce;Croce;4;4;;;12/04/2017;19/06/2017;;21/08/2017;;11/11/2017;Consegna al sindaco ;13,030428;42,924971
+;MARCHE;Visso;Cupi;Cupi;1;;1;;27/11/2017;16/04/2018;11/05/2018;14/05/2018;20/06/2018;27/09/2018;Consegna al sindaco ;13,111122;42,999968
+;MARCHE;Visso;Via Cesare Battisti 1 area commerciale;Via Cesare Battisti 1 area commerciale;46;31;10;5;12/04/2017;24/07/2017;28/11/2017;29/11/2017;15/03/2018;29/07/2018;Consegna al sindaco ;13,082553;42,93634
+;MARCHE;Visso;Via Cesare Battisti 2;Via Cesare Battisti 2;20;4;6;10;05/05/2017;05/07/2017;;14/09/2017;;08/01/2018;Consegna al sindaco ;13,081824;42,936128
+;MARCHE;Visso;Villa Sant'Antonio;Villa Sant'Antonio;70;33;27;10;12/04/2017;26/06/2017;;09/10/2017;;05/05/2018;Consegna al sindaco ;13,082786;42,941616
+;MARCHE;Visso;Villa Sant'Antonio 2 (Pretara);Villa Sant'Antonio 2 (Pretara);33;14;14;5;05/05/2017;05/07/2017;;28/08/2017;;06/02/2018;Consegna al sindaco ;13,083736;42,942257
